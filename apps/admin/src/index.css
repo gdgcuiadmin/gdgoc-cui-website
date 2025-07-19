@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4285f4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3367d6;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Google-style focus states */
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Custom utility classes */
+.text-google-blue {
+  color: #4285f4;
+}
+
+.text-google-green {
+  color: #34a853;
+}
+
+.text-google-yellow {
+  color: #fbbc04;
+}
+
+.text-google-red {
+  color: #ea4335;
+}
+
+.bg-google-blue {
+  background-color: #4285f4;
+}
+
+.bg-google-green {
+  background-color: #34a853;
+}
+
+.bg-google-yellow {
+  background-color: #fbbc04;
+}
+
+.bg-google-red {
+  background-color: #ea4335;
+}
+
+.border-google-blue {
+  border-color: #4285f4;
+}
+
+.border-google-green {
+  border-color: #34a853;
+}
+
+.border-google-yellow {
+  border-color: #fbbc04;
+}
+
+.border-google-red {
+  border-color: #ea4335;
+}
+
+/* Loading animation */
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4285f4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  .text-4xl {
+    font-size: 2.25rem;
+  }
+  .text-5xl {
+    font-size: 3rem;
+  }
+  .text-6xl {
+    font-size: 3.75rem;
+  }
+}
+
+/* Custom gradient backgrounds */
+.gradient-bg-1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-bg-2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-bg-3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Selection colors */
+::selection {
+  background: #4285f4;
+  color: white;
+}
+
+::-moz-selection {
+  background: #4285f4;
+  color: white;
+}

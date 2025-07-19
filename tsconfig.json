@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@mygdg/shared/*": ["packages/shared/*"]
+    }
+  }
+}
