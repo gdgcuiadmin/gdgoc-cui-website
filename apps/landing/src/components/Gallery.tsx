@@ -117,9 +117,7 @@ const Gallery: React.FC = () => {
                   key={event.id}
                   className="gallery-item group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
                   whileHover={{ y: -5 }}
-                  onClick={() =>
-                    window.open("https://www.linkedin.com", "_blank")
-                  }
+                  onClick={() => window.open(event.registration_url, "_blank")}
                 >
                   <div className="aspect-w-16 aspect-h-12 relative overflow-hidden">
                     <img
