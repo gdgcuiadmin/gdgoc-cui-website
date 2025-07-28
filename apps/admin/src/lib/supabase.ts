@@ -16,7 +16,7 @@ export interface Event {
   location: string;
   attendees: number;
   max_attendees?: number;
-  status: "upcoming" | "completed" | "cancelled";
+  status: "upcoming" | "completed";
   color: string;
   tags: string[];
   image_url?: string;
@@ -142,7 +142,7 @@ export const getUpcomingEvents = async () => {
 };
 
 export const createEvent = async (
-  event: Omit<Event, "id" | "created_at" | "updated_at">
+  event: Omit<Event, "id" | "created_at" | "updated_at">,
 ) => {
   const { data, error } = await supabase
     .from("events")
@@ -186,7 +186,7 @@ export const getAllTeamMembers = async () => {
 };
 
 export const createTeamMember = async (
-  member: Omit<TeamMember, "id" | "created_at" | "updated_at">
+  member: Omit<TeamMember, "id" | "created_at" | "updated_at">,
 ) => {
   const { data, error } = await supabase
     .from("team_members")
@@ -198,7 +198,7 @@ export const createTeamMember = async (
 
 export const updateTeamMember = async (
   id: string,
-  member: Partial<TeamMember>
+  member: Partial<TeamMember>,
 ) => {
   const { data, error } = await supabase
     .from("team_members")
@@ -222,7 +222,7 @@ export const getGalleryImages = async () => {
       `
       *,
       event:events(id, title, date)
-    `
+    `,
     )
     .order("order_index", { ascending: true });
   return { data, error };
@@ -238,7 +238,7 @@ export const getEventGalleryImages = async (eventId: string) => {
 };
 
 export const createGalleryImage = async (
-  image: Omit<GalleryImage, "id" | "created_at" | "updated_at" | "event">
+  image: Omit<GalleryImage, "id" | "created_at" | "updated_at" | "event">,
 ) => {
   const { data, error } = await supabase
     .from("gallery_images")
@@ -251,7 +251,7 @@ export const createGalleryImage = async (
 
 export const updateGalleryImage = async (
   id: string,
-  image: Partial<GalleryImage>
+  image: Partial<GalleryImage>,
 ) => {
   const { data, error } = await supabase
     .from("gallery_images")
@@ -292,7 +292,7 @@ export const getFeaturedResources = async () => {
 };
 
 export const createResource = async (
-  resource: Omit<Resource, "id" | "created_at" | "updated_at">
+  resource: Omit<Resource, "id" | "created_at" | "updated_at">,
 ) => {
   const { data, error } = await supabase
     .from("resources")
@@ -304,7 +304,7 @@ export const createResource = async (
 
 export const updateResource = async (
   id: string,
-  resource: Partial<Resource>
+  resource: Partial<Resource>,
 ) => {
   const { data, error } = await supabase
     .from("resources")
@@ -323,7 +323,7 @@ export const deleteResource = async (id: string) => {
 export const uploadFile = async (
   filePrefix: string,
   file: File,
-  name: string
+  name: string,
 ) => {
   const bucket = filePrefix.split("/")[0];
   const folder = filePrefix.split("/")[1];
@@ -434,10 +434,10 @@ export const getWebsiteStats = async () => {
 
   const events = eventsResult.data || [];
   const upcomingEvents = events.filter(
-    (event) => event.status === "upcoming"
+    (event) => event.status === "upcoming",
   ).length;
   const completedEvents = events.filter(
-    (event) => event.status === "completed"
+    (event) => event.status === "completed",
   ).length;
 
   return {

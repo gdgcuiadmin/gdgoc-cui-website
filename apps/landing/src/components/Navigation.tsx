@@ -1,10 +1,14 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Menu, X, Users, Calendar, Camera, BookOpen, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import GDGLogo from "../../public/assets/Group 32.png";
+import GDGLogo from "../../public/assets/Horizontal - Light.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navigation: React.FC = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,12 +21,12 @@ const Navigation: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: "About", href: "#about", icon: Users },
-    { name: "Events", href: "#events", icon: Calendar },
-    { name: "Team", href: "#team", icon: Users },
-    { name: "Gallery", href: "#gallery", icon: Camera },
-    { name: "Resources", href: "#resources", icon: BookOpen },
-    { name: "Contact", href: "#contact", icon: Mail },
+    { name: "About", href: "/#about", icon: Users },
+    { name: "Events", href: "/#events", icon: Calendar },
+    { name: "Team", href: "/#team", icon: Users },
+    { name: "Gallery", href: "/#gallery", icon: Camera },
+    { name: "Resources", href: "/#resources", icon: BookOpen },
+    { name: "Contact", href: "/contact", icon: Mail },
   ];
 
   const scrollToSection = (href: string) => {
@@ -30,11 +34,16 @@ const Navigation: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setTimeout(() => setIsOpen(false), 500);
+  };
 
-    // Close mobile menu after navigation
-    setTimeout(() => {
+  const handleNavigation = (href: string) => {
+    if (href.startsWith("#")) {
+      scrollToSection(href);
+    } else {
+      router.push(href);
       setIsOpen(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -50,17 +59,13 @@ const Navigation: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => scrollToSection("#hero")}
+            onClick={() => router.push("/")}
           >
-            {/* <div className="w-8 h-8 bg-gradient-to-r from-google-blue to-google-green rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-sm">G</span>
-            </div>
-            <span className="font-google-sans font-semibold text-gray-800">GDG COMSATS</span>*/}
             <Image
               src={GDGLogo}
               alt="GDG Logo"
-              width={40}
-              height={40}
+              width={280}
+              height={280}
               className="rounded-full"
             />
           </motion.div>
@@ -72,8 +77,8 @@ const Navigation: React.FC = () => {
                 key={item.name}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 hover:text-google-blue transition-colors duration-200 font-medium"
+                onClick={() => handleNavigation(item.href)}
+                className="text-gray-700 cursor-pointer hover:text-google-blue transition-colors duration-200 font-medium"
               >
                 {item.name}
               </motion.button>
@@ -109,7 +114,7 @@ const Navigation: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavigation(item.href)}
                   className="w-full text-left px-3 py-2 text-gray-700 hover:text-google-blue hover:bg-gray-50 rounded-lg flex items-center space-x-2 transition-colors duration-200"
                 >
                   <item.icon size={18} />

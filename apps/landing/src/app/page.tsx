@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 import { initEmailJS } from "../lib/emailjs";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Resources from "@/components/Resources";
@@ -53,15 +52,13 @@ export default function Home() {
 
   return (
     <div className="App font-google-sans">
-      <Navigation />
       <Hero />
       <About />
       <Events />
-      <Team />
       <Gallery />
+      <Team />
       <Resources />
-      <Contact />
-      <Footer />
+      {/* <Contact /> */}
     </div>
   );
 }

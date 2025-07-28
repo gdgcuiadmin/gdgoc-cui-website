@@ -109,15 +109,15 @@ const Hero: React.FC = () => {
               </div>
             </div>{" "}
             */}
-            <Image
-              src={GDGLogo}
-              alt="GDG Logo"
-              width={400}
-              // height={50}
-              priority
-              quality={100}
-              className="mx-auto mb-6"
-            />
+            {/* <Image */}
+            {/*   src={GDGLogo} */}
+            {/*   alt="GDG Logo" */}
+            {/*   width={400} */}
+            {/*   // height={50} */}
+            {/*   priority */}
+            {/*   quality={100} */}
+            {/*   className="mx-auto mb-6" */}
+            {/* /> */}
           </motion.div>
 
           {/* Main Heading */}

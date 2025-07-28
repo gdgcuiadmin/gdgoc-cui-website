@@ -13,24 +13,6 @@
   --font-google-sans: "Google Sans", sans-serif;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4285f4;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #3367d6;
-}
-
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;

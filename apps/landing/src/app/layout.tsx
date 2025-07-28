@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "GDG COMSATS - Google Developer Groups",
@@ -112,7 +114,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-google-sans  antialiased`}>{children}</body>
+      <body className={`font-google-sans  antialiased`}>
+        <Navigation />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -8,8 +8,9 @@ import {
   Clock,
   MapPin,
   Users,
+  Link as LinkIcon,
 } from "lucide-react";
-import { Event } from "../lib/supabase";
+import { Event, uploadFile } from "../lib/supabase";
 import Modal from "./shared/Modal";
 import {
   useEvents,
@@ -17,6 +18,8 @@ import {
   useUpdateEvent,
   useDeleteEvent,
 } from "../hooks/EventsManagerHooks";
+import ImageInput from "./shared/ImageInput";
+import TagsInput from "./shared/TagsInput";
 
 const EventsManager: React.FC = () => {
   const { data: events, isLoading } = useEvents();
@@ -37,19 +40,36 @@ const EventsManager: React.FC = () => {
     color: "google-blue",
     tags: [] as string[],
     image_url: "",
+    registration_url: "",
   });
+  const [selectEventImage, setSelectedEventImage] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
+      let imageUrl = formData.image_url;
+
+      if (selectEventImage) {
+        imageUrl = await uploadFile(
+          "images/gallery",
+          selectEventImage,
+          selectEventImage.name.replace(/\s+/g, "-").toLowerCase(),
+        );
+      }
+
+      const data = {
+        ...formData,
+        image_url: imageUrl,
+      };
+
       if (editingEvent) {
         await updateMutation.mutateAsync({
           id: editingEvent.id,
-          data: formData,
+          data: data,
         });
       } else {
-        await createMutation.mutateAsync(formData);
+        await createMutation.mutateAsync(data);
       }
       resetForm();
     } catch (error) {
@@ -79,6 +99,7 @@ const EventsManager: React.FC = () => {
       color: "google-blue",
       tags: [],
       image_url: "",
+      registration_url: "",
     });
     setEditingEvent(null);
     setShowForm(false);
@@ -97,6 +118,7 @@ const EventsManager: React.FC = () => {
       color: event.color,
       tags: event.tags,
       image_url: event.image_url || "",
+      registration_url: event.registration_url || "",
     });
     setShowForm(true);
   };
@@ -188,6 +210,32 @@ const EventsManager: React.FC = () => {
                 <Users size={14} />
                 <span>{event.attendees} attendees</span>
               </div>
+              {event.status === "upcoming" && event.registration_url && (
+                <div className="flex items-center space-x-2">
+                  <LinkIcon size={14} />
+                  <a
+                    href={event.registration_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-google-blue hover:underline"
+                  >
+                    Registration Link
+                  </a>
+                </div>
+              )}
+              {event.status === "completed" && event.registration_url && (
+                <div className="flex items-center space-x-2">
+                  <LinkIcon size={14} />
+                  <a
+                    href={event.registration_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-google-blue hover:underline"
+                  >
+                    LinkedIn Post
+                  </a>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-1 mt-4">
@@ -205,45 +253,24 @@ const EventsManager: React.FC = () => {
       </div>
 
       {/* Event Form Modal */}
-      <Modal open={showForm} setOpen={setShowForm}>
+      <Modal open={showForm} setOpen={setShowForm} reset={resetForm}>
         <h3 className="text-xl font-google-sans font-semibold mb-6">
           {editingEvent ? "Edit Event" : "Add New Event"}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Event Title
-              </label>
-              <input
-                type="text"
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Status
-              </label>
-              <select
-                value={formData.status}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    status: e.target.value as "upcoming" | "completed",
-                  })
-                }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
-              >
-                <option value="upcoming">Upcoming</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Event Title
+            </label>
+            <input
+              type="text"
+              value={formData.title}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
+            />
           </div>
 
           <div>
@@ -258,6 +285,18 @@ const EventsManager: React.FC = () => {
               required
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Event Image
+            </label>
+            <ImageInput
+              selectedImage={selectEventImage}
+              setSelectedImage={setSelectedEventImage}
+              existingImage={formData.image_url}
+              isRequired={true}
             />
           </div>
 
@@ -350,39 +389,62 @@ const EventsManager: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Image URL (Optional)
+                Status
               </label>
-              <input
-                type="url"
-                value={formData.image_url}
+              <select
+                value={formData.status}
                 onChange={(e) =>
-                  setFormData({ ...formData, image_url: e.target.value })
+                  setFormData({
+                    ...formData,
+                    status: e.target.value as "upcoming" | "completed",
+                  })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
-              />
+              >
+                <option value="upcoming">Upcoming</option>
+                <option value="completed">Completed</option>
+              </select>
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Tags (comma-separated)
-            </label>
-            <input
-              type="text"
-              value={formData.tags.join(", ")}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  tags: e.target.value
-                    .split(",")
-                    .map((tag) => tag.trim())
-                    .filter((tag) => tag),
-                })
-              }
-              placeholder="e.g., Android, Kotlin, Mobile Dev"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
-            />
-          </div>
+          {formData.status === "upcoming" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Registration URL (optional)
+              </label>
+              <input
+                type="url"
+                value={formData.registration_url}
+                onChange={(e) =>
+                  setFormData({ ...formData, registration_url: e.target.value })
+                }
+                placeholder="https://example.com/register"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
+              />
+            </div>
+          )}
+
+          {formData.status === "completed" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                LinkedIn Post URL (optional)
+              </label>
+              <input
+                type="url"
+                value={formData.registration_url}
+                onChange={(e) =>
+                  setFormData({ ...formData, registration_url: e.target.value })
+                }
+                placeholder="https://linkedin.com/..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
+              />
+            </div>
+          )}
+
+          <TagsInput
+            tags={formData.tags}
+            setTags={(tags) => setFormData({ ...formData, tags })}
+          />
 
           <div className="flex justify-end space-x-4 pt-4">
             <button

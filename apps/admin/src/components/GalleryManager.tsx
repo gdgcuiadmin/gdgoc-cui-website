@@ -18,6 +18,7 @@ import {
   DeleteParams,
 } from "../hooks/GalleryManagerHooks.js";
 import { useEvents } from "../hooks/EventsManagerHooks.js";
+import ImageInput from "./shared/ImageInput.js";
 
 const GalleryManager: React.FC = () => {
   const { data: galleryImages, isLoading: isLoadingImages } =
@@ -31,7 +32,7 @@ const GalleryManager: React.FC = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [editingImage, setEditingImage] = useState<GalleryImage | null>(null);
   const [selectedGalleryImage, setSelectedGalleryImage] = useState<File | null>(
-    null
+    null,
   );
   const [formData, setFormData] = useState({
     title: "",
@@ -56,7 +57,7 @@ const GalleryManager: React.FC = () => {
           "images/gallery",
           selectedGalleryImage,
           // formData.title.replace(/\s+/g, "-").toLowerCase()
-          selectedGalleryImage.name.replace(/\s+/g, "-").toLowerCase()
+          selectedGalleryImage.name.replace(/\s+/g, "-").toLowerCase(),
         );
       }
 
@@ -70,11 +71,8 @@ const GalleryManager: React.FC = () => {
           id: editingImage.id,
           data: imageData,
         });
-        console.log("image data", imageData);
       } else {
-        console.log("Creating");
         await createMutation.mutateAsync(imageData);
-        console.log("Image created: ", imageData);
       }
       resetForm();
     } catch (error) {
@@ -143,14 +141,17 @@ const GalleryManager: React.FC = () => {
 
   // Group images by event
   const imagesByEvent =
-    galleryImages?.reduce((acc, image) => {
-      const eventId = image.event_id || "no-event";
-      if (!acc[eventId]) {
-        acc[eventId] = [];
-      }
-      acc[eventId].push(image);
-      return acc;
-    }, {} as Record<string, GalleryImage[]>) || {};
+    galleryImages?.reduce(
+      (acc, image) => {
+        const eventId = image.event_id || "no-event";
+        if (!acc[eventId]) {
+          acc[eventId] = [];
+        }
+        acc[eventId].push(image);
+        return acc;
+      },
+      {} as Record<string, GalleryImage[]>,
+    ) || {};
 
   if (isLoadingImages || isLoadingEvents) {
     return (
@@ -265,7 +266,7 @@ const GalleryManager: React.FC = () => {
                           onClick={() =>
                             confirmDelete(
                               image.id,
-                              image.image_url.split("/").pop() || ""
+                              image.image_url.split("/").pop() || "",
                             )
                           }
                           className="p-1.5 bg-white/20 text-white rounded-full hover:bg-red-500 transition-colors"
@@ -351,32 +352,38 @@ const GalleryManager: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Image File
             </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                setSelectedGalleryImage(
-                  e.target.files ? e.target.files[0] : null
-                )
-              }
-              required={!editingImage}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
+            {/* <input */}
+            {/*   type="file" */}
+            {/*   accept="image/*" */}
+            {/*   onChange={(e) => */}
+            {/*     setSelectedGalleryImage( */}
+            {/*       e.target.files ? e.target.files[0] : null, */}
+            {/*     ) */}
+            {/*   } */}
+            {/*   required={!editingImage} */}
+            {/*   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent" */}
+            {/* /> */}
+            {/* {selectedGalleryImage ? ( */}
+            {/*   <img */}
+            {/*     src={URL.createObjectURL(selectedGalleryImage)} */}
+            {/*     alt="New Preview" */}
+            {/*     className="mt-2 w-20 h-20 object-cover rounded-lg" */}
+            {/*   /> */}
+            {/* ) : ( */}
+            {/*   formData.image_url && ( */}
+            {/*     <img */}
+            {/*       src={formData.image_url} */}
+            {/*       alt="Current" */}
+            {/*       className="mt-2 w-20 h-20 object-cover rounded-lg" */}
+            {/*     /> */}
+            {/*   ) */}
+            {/* )} */}
+            <ImageInput
+              selectedImage={selectedGalleryImage}
+              setSelectedImage={setSelectedGalleryImage}
+              existingImage={formData.image_url}
+              isRequired={!!editingImage}
             />
-            {selectedGalleryImage ? (
-              <img
-                src={URL.createObjectURL(selectedGalleryImage)}
-                alt="New Preview"
-                className="mt-2 w-20 h-20 object-cover rounded-lg"
-              />
-            ) : (
-              formData.image_url && (
-                <img
-                  src={formData.image_url}
-                  alt="Current"
-                  className="mt-2 w-20 h-20 object-cover rounded-lg"
-                />
-              )
-            )}
           </div>
 
           <div>

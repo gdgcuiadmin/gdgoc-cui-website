@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getEvents, Event } from "../lib/supabase";
+import { getUpcomingEvents, Event } from "../lib/supabase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +23,7 @@ const Events: React.FC = () => {
 
   const fetchEvents = async () => {
     setLoading(true);
-    const { data, error } = await getEvents();
+    const { data, error } = await getUpcomingEvents();
     if (data && !error) {
       setEvents(data);
     }
@@ -32,35 +32,18 @@ const Events: React.FC = () => {
 
   useEffect(() => {
     if (sectionRef.current && events.length > 0) {
-      const timeline = sectionRef.current.querySelector(".timeline-line");
       const eventCards = sectionRef.current.querySelectorAll(".event-card");
-
-      if (timeline) {
-        gsap.fromTo(
-          timeline,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            duration: 1.5,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 70%",
-              end: "bottom 30%",
-            },
-          },
-        );
-      }
 
       gsap.fromTo(
         eventCards,
-        { x: (index) => (index % 2 === 0 ? -50 : 50), opacity: 0 },
+        { y: 50, opacity: 0, scale: 0.9 },
         {
-          x: 0,
+          y: 0,
           opacity: 1,
+          scale: 1,
           duration: 0.8,
-          stagger: 0.3,
-          ease: "power2.out",
+          stagger: 0.2,
+          ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 60%",
@@ -73,10 +56,7 @@ const Events: React.FC = () => {
 
   if (loading) {
     return (
-      <section
-        id="events"
-        className="py-20 bg-gradient-to-b from-white to-gray-50"
-      >
+      <section id="events" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="loading-spinner mx-auto"></div>
@@ -88,11 +68,7 @@ const Events: React.FC = () => {
   }
 
   return (
-    <section
-      id="events"
-      ref={ref}
-      className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
-    >
+    <section id="events" ref={ref} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -101,12 +77,12 @@ const Events: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-google-sans font-bold text-gray-900 mb-6">
-            Events & <span className="text-google-blue">Workshops</span>
+            Upcoming <span className="text-google-blue">Events</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Join our exciting lineup of tech events, workshops, and meetups
+            Don't miss out on our upcoming tech events, workshops, and meetups
             designed to enhance your skills and connect you with the developer
-            community.
+            community. Register now!
           </p>
         </motion.div>
 
@@ -114,134 +90,104 @@ const Events: React.FC = () => {
           <div className="text-center py-16">
             <Calendar size={64} className="mx-auto text-gray-300 mb-4" />
             <h3 className="text-xl font-google-sans font-semibold text-gray-600 mb-2">
-              No Events Yet
+              No Upcoming Events
             </h3>
             <p className="text-gray-500">
-              Stay tuned for upcoming events and workshops!
+              Stay tuned! We're planning amazing events and workshops for you.
             </p>
           </div>
         ) : (
-          <div ref={sectionRef} className="relative">
-            {/* Timeline Line - Hidden on mobile, visible on larger screens */}
-            <div className="timeline-line hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-google-blue via-google-green to-google-yellow h-full rounded-full origin-top"></div>
-
-            <div className="space-y-8 lg:space-y-16">
-              {events.map((event, index) => (
-                <motion.div
-                  key={event.id}
-                  className={`event-card relative ${
-                    // On mobile: full width, on lg: alternating layout
-                    "lg:flex lg:items-center " +
-                    (index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse")
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  {/* Timeline Dot - Only visible on large screens */}
-                  <div
-                    className={`hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-${event.color} rounded-full border-4 border-white shadow-lg z-10`}
-                  ></div>
-
-                  {/* Event Card */}
-                  <div
-                    className={`w-full lg:w-5/12 ${index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"}`}
-                  >
-                    <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                      <div className="flex items-center justify-between mb-4">
-                        <div
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            event.status === "upcoming"
-                              ? "bg-green-100 text-green-700"
-                              : event.status === "completed"
-                                ? "bg-gray-100 text-gray-600"
-                                : "bg-red-100 text-red-600"
-                          }`}
-                        >
-                          {event.status === "upcoming"
-                            ? "Upcoming"
-                            : event.status === "completed"
-                              ? "Completed"
-                              : "Cancelled"}
-                        </div>
-                        <div className="flex items-center space-x-1 text-gray-500">
-                          <Users size={16} />
-                          <span className="text-sm">
-                            {event.attendees > 0 ? event.attendees : "TBA"}
-                            {event.max_attendees && ` / ${event.max_attendees}`}
-                          </span>
-                        </div>
-                      </div>
-
-                      {event.image_url && (
-                        <div className="mb-4 rounded-lg overflow-hidden">
-                          <img
-                            src={event.image_url}
-                            alt={event.title}
-                            className="w-full h-48 object-cover"
-                          />
-                        </div>
-                      )}
-
-                      <h3 className="text-xl font-google-sans font-semibold text-gray-900 mb-3">
-                        {event.title}
-                      </h3>
-
-                      <p className="text-gray-600 mb-4">{event.description}</p>
-
-                      <div className="space-y-2 mb-4">
-                        <div className="flex items-center space-x-2 text-sm text-gray-500">
-                          <Calendar size={16} />
-                          <span>
-                            {new Date(event.date).toLocaleDateString("en-US", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-sm text-gray-500">
-                          <Clock size={16} />
-                          <span>{event.time}</span>
-                        </div>
-                        <div className="flex items-start space-x-2 text-sm text-gray-500">
-                          <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                          <span className="break-words">{event.location}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {event.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className={`px-2 py-1 text-xs rounded-full bg-${event.color}/10 text-${event.color} font-medium`}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {event.status === "upcoming" && (
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => {
-                            if (event.registration_url) {
-                              window.open(event.registration_url, "_blank");
-                            }
-                          }}
-                          className={`w-full bg-${event.color} text-white py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity`}
-                        >
-                          <span>Register Now</span>
-                          <ExternalLink size={16} />
-                        </motion.button>
-                      )}
-                    </div>
+          <div
+            ref={sectionRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {events.map((event, index) => (
+              <motion.div
+                key={event.id}
+                className="event-card cursor-pointer group"
+                whileHover={{ y: -10 }}
+              >
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                  {/* Event Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={
+                        event.image_url ||
+                        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
+                      }
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
 
-                  {/* Spacer for the other side - Only on large screens */}
-                  <div className="hidden lg:block lg:w-5/12"></div>
-                </motion.div>
-              ))}
-            </div>
+                  {/* Event Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-google-sans font-semibold text-gray-900 mb-3 transition-colors">
+                      {event.title}
+                    </h3>
+
+                    <p className="text-gray-600 mb-4 line-clamp-2">
+                      {event.description}
+                    </p>
+
+                    {/* Event Details */}
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                        <Calendar size={16} />
+                        <span>
+                          {new Date(event.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                        <Clock size={16} />
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="flex items-start space-x-2 text-sm text-gray-500">
+                        <MapPin size={16} className="mt-0.5 flex-shrink-0 " />
+                        <span className="break-words">{event.location}</span>
+                      </div>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {event.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className={`px-2 py-1 text-xs rounded-full bg-${event.color}/10 text-${event.color} font-medium`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {event.tags.length > 3 && (
+                        <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600 font-medium">
+                          +{event.tags.length - 3} more
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Register Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        if (event.registration_url) {
+                          window.open(event.registration_url, "_blank");
+                        }
+                      }}
+                      className={`w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300`}
+                    >
+                      <span>Register Now</span>
+                      <ExternalLink size={16} />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         )}
 
@@ -254,24 +200,39 @@ const Events: React.FC = () => {
         >
           <div className="bg-gradient-to-r from-google-blue/10 to-google-green/10 rounded-3xl p-8">
             <h3 className="text-2xl font-google-sans font-semibold text-gray-900 mb-4">
-              Don't Miss Out on Future Events!
+              Want to Stay Updated?
             </h3>
             <p className="text-gray-600 mb-6">
-              Join our community to get notified about upcoming workshops,
-              hackathons, and tech talks.
+              Join our community to get early access to event registrations and
+              exclusive updates about workshops, hackathons, and tech talks.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                document
-                  .querySelector("#contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
-            >
-              Join Our Community
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
+              >
+                Join Our Community
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  window.open(
+                    "https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/",
+                    "_blank",
+                  )
+                }
+                className="border-2 border-google-green text-green-700 px-8 py-3 rounded-full font-medium hover:bg-google-green hover:text-white transition-all duration-300"
+              >
+                Follow on GDG Platform
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </div>
