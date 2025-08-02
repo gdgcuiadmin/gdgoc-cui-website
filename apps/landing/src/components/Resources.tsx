@@ -298,7 +298,9 @@ const Resources: React.FC = () => {
                                 </div>
                               </div>
 
-                              <h4 className="font-google-sans font-semibold text-lg text-gray-900 mb-2 group-hover:text-google-blue transition-colors">
+                              <h4
+                                className={`font-google-sans font-semibold text-lg text-gray-900 mb-2 group-hover:text-${resource.color} transition-colors`}
+                              >
                                 {resource.name}
                               </h4>
 
