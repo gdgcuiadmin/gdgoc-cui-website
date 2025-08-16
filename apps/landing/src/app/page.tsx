@@ -58,7 +58,7 @@ export default function Home() {
       <Gallery />
       <Team />
       <Resources />
-      {/* <Contact /> */}
+      <Contact />
     </div>
   );
 }
