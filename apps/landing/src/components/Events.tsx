@@ -115,7 +115,7 @@ const Events: React.FC = () => {
                       src={
                         event.image_url ||
                         "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
-                      }
+                      }s
                       alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -172,19 +172,24 @@ const Events: React.FC = () => {
                     </div>
 
                     {/* Register Button */}
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => {
-                        if (event.registration_url) {
-                          window.open(event.registration_url, "_blank");
-                        }
-                      }}
-                      className={`w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300`}
+                    <Link
+                      href="https://www.instagram.com/gdgoc.cuilhr/"
+                      target="_blank"
                     >
-                      <span>Register Now</span>
-                      <ExternalLink size={16} />
-                    </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          if (event.registration_url) {
+                            window.open(event.registration_url, "_blank");
+                          }
+                        }}
+                        className={`w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300`}
+                      >
+                        <span>Stay updated</span>
+                        <ExternalLink size={16} />
+                      </motion.button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
