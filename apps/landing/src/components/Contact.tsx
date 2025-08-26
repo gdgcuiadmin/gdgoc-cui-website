@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
           });
 
           toast.success(
-            "Message sent successfully! We'll get back to you soon.",
+            "Message sent successfully! We'll get back to you soon."
           );
         } else {
           throw new Error("Failed to send email");
@@ -411,7 +411,10 @@ const Contact: React.FC = () => {
                 href="https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(52, 168, 83, 0.3)" }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 25px rgba(52, 168, 83, 0.3)",
+                  }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-google-green text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:bg-green-600 transition-all duration-300"
                 >

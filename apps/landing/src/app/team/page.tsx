@@ -106,8 +106,8 @@ const TeamPage: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const leadImageVariants = {
@@ -119,9 +119,9 @@ const TeamPage: React.FC = () => {
       transition: {
         duration: 0.8,
         ease: "backOut",
-        delay: 0.3
-      }
-    }
+        delay: 0.3,
+      },
+    },
   };
 
   return (
@@ -199,7 +199,7 @@ const TeamPage: React.FC = () => {
                       <span className="text-google-blue">Ms. Zoha Waheed</span>
                     </h2>
                     <p className="text-xl text-google-green font-medium mb-4">
-                      GDGoC COMSATS Lahore President 2024-2025
+                      GDGoC COMSATS Lahore Organizer (Lead)
                     </p>
                   </motion.div>
 
@@ -210,20 +210,26 @@ const TeamPage: React.FC = () => {
                     className="space-y-4"
                   >
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Meet Ms. Zoha Waheed, the dedicated and visionary leader of GDGoC COMSATS Lahore 
-                      for 2024-2025. With a strong passion for technology and a commitment to making it 
-                      accessible to all, Zoha aims to create a thriving, inclusive community where every 
-                      student can unlock their potential. Her leadership focuses on empowering talented 
-                      students, ensuring they gain the skills and resources they need.
+                      Meet Ms. Zoha Waheed, the Organizer (Lead) of Google
+                      Developer Group (GDG) on Campus, COMSATS Lahore.
+                      Passionate about technology and accessibility, she is
+                      dedicated to building an inclusive community where
+                      students can grow, collaborate, and lead.
                     </p>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      As a GDGoC Organizer, Zoha aims to guide students in exploring cutting-edge Google 
-                      technologies and show them how these tools can simplify their lives. She is driven 
-                      to foster a collaborative environment where students learn and apply their skills to 
-                      real-world challenges, opening doors to endless possibilities in tech.
+                      Under her leadership, the chapter has grown into a 3,000+
+                      member community, introducing Skill Up Sessions, COMSATS’
+                      first student startup panel talk, initiatives are taken
+                      for women empowerment, and incubation assistance for
+                      aspiring founders. Since then, GDG Comsats Lahore has also
+                      led tech sessions, study jams, and workshops, giving
+                      students hands-on exposure to Google’s fast-track
+                      resources within the university.
                     </p>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Under her leadership, the coming year promises growth, innovation, and opportunity for all.
+                      Let’s join hands together to create more opportunities,
+                      drive innovation, and build a stronger tech community for
+                      all.
                     </p>
                   </motion.div>
 
@@ -240,7 +246,11 @@ const TeamPage: React.FC = () => {
                       className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:bg-blue-700 transition-colors"
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 17,
+                      }}
                     >
                       <Linkedin size={20} />
                       Connect on LinkedIn
@@ -260,7 +270,11 @@ const TeamPage: React.FC = () => {
                     <motion.div
                       className="w-80 h-80 rounded-full overflow-hidden bg-gradient-to-br from-google-blue/20 via-google-green/20 to-google-yellow/20 shadow-2xl border-4 border-white"
                       whileHover={{ scale: 1.05, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
                     >
                       {/* Replace with actual image of Ms. Zoha Waheed */}
                       <Image
@@ -271,18 +285,26 @@ const TeamPage: React.FC = () => {
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           // Fallback if image doesn't exist
-                          e.currentTarget.style.display = 'none';
-                          const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                          e.currentTarget.style.display = "none";
+                          const fallback = e.currentTarget
+                            .nextElementSibling as HTMLElement;
                           if (fallback) {
-                            fallback.style.display = 'flex';
+                            fallback.style.display = "flex";
                           }
                         }}
                       />
                       {/* Fallback content */}
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-google-blue/20 via-google-green/20 to-google-yellow/20" style={{ display: 'none' }}>
+                      <div
+                        className="w-full h-full flex items-center justify-center bg-gradient-to-br from-google-blue/20 via-google-green/20 to-google-yellow/20"
+                        style={{ display: "none" }}
+                      >
                         <div className="text-center">
-                          <div className="text-6xl font-bold text-google-blue mb-2">ZW</div>
-                          <div className="text-lg font-medium text-gray-600">President</div>
+                          <div className="text-6xl font-bold text-google-blue mb-2">
+                            ZW
+                          </div>
+                          <div className="text-lg font-medium text-gray-600">
+                            President
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -290,40 +312,40 @@ const TeamPage: React.FC = () => {
                     {/* Decorative Elements */}
                     <motion.div
                       className="absolute -top-4 -right-4 w-24 h-24 bg-google-blue/10 rounded-full"
-                      animate={{ 
+                      animate={{
                         scale: [1, 1.1, 1],
-                        opacity: [0.3, 0.6, 0.3]
+                        opacity: [0.3, 0.6, 0.3],
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 3,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: "easeInOut",
                       }}
                     />
                     <motion.div
                       className="absolute -bottom-6 -left-6 w-16 h-16 bg-google-green/10 rounded-full"
-                      animate={{ 
+                      animate={{
                         scale: [1.1, 1, 1.1],
-                        opacity: [0.6, 0.3, 0.6]
+                        opacity: [0.6, 0.3, 0.6],
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 2,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: 1
+                        delay: 1,
                       }}
                     />
                     <motion.div
                       className="absolute top-1/2 -left-8 w-12 h-12 bg-google-yellow/10 rounded-full"
-                      animate={{ 
+                      animate={{
                         y: [-10, 10, -10],
-                        opacity: [0.4, 0.7, 0.4]
+                        opacity: [0.4, 0.7, 0.4],
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 4,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: 0.5
+                        delay: 0.5,
                       }}
                     />
                   </div>
@@ -343,8 +365,9 @@ const TeamPage: React.FC = () => {
               Our Dedicated Team
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Meet the passionate individuals who bring our vision to life through their 
-              dedication, expertise, and commitment to community building.
+              Meet the passionate individuals who bring our vision to life
+              through their dedication, expertise, and commitment to community
+              building.
             </p>
           </motion.div>
 
