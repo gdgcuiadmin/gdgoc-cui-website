@@ -278,7 +278,7 @@ const TeamPage: React.FC = () => {
                     >
                       {/* Replace with actual image of Ms. Zoha Waheed */}
                       <Image
-                        src="/assets/lead.jpeg"
+                        src="/assets/lead.jpg"
                         alt="Ms. Zoha Waheed - GDGoC President"
                         width={320}
                         height={320}
