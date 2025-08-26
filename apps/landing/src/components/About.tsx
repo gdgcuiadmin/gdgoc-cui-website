@@ -120,6 +120,24 @@ const About: React.FC = () => {
           ))}
         </div>
 
+        {/* Meet Our Team Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          className="text-center mt-12"
+        >
+          <Link
+            href="/team"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-google-blue to-google-green text-white px-8 py-4 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group mb-12"
+          >
+            <Users
+              size={20}
+              className="group-hover:scale-110 transition-transform"
+            />
+            Meet Our Amazing Team
+          </Link>
+        </motion.div>
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -173,25 +191,6 @@ const About: React.FC = () => {
               <div className="text-gray-600 font-medium">Collaborations</div>
             </div>
           </div>
-        </motion.div>
-
-        {/* Meet Our Team Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.6, duration: 0.8 }}
-          className="text-center mt-12"
-        >
-          <Link
-            href="/team"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-google-blue to-google-green text-white px-8 py-4 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
-          >
-            <Users
-              size={20}
-              className="group-hover:scale-110 transition-transform"
-            />
-            Meet Our Amazing Team
-          </Link>
         </motion.div>
       </div>
     </section>

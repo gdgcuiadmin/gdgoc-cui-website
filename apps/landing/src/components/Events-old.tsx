@@ -5,6 +5,7 @@ import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getEvents, Event } from "../lib/supabase";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +49,7 @@ const Events: React.FC = () => {
               start: "top 70%",
               end: "bottom 30%",
             },
-          },
+          }
         );
       }
 
@@ -66,7 +67,7 @@ const Events: React.FC = () => {
             start: "top 60%",
             end: "bottom 20%",
           },
-        },
+        }
       );
     }
   }, [events]);
@@ -143,7 +144,9 @@ const Events: React.FC = () => {
 
                   {/* Event Card */}
                   <div
-                    className={`w-full lg:w-5/12 ${index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"}`}
+                    className={`w-full lg:w-5/12 ${
+                      index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"
+                    }`}
                   >
                     <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                       <div className="flex items-center justify-between mb-4">
@@ -152,15 +155,15 @@ const Events: React.FC = () => {
                             event.status === "upcoming"
                               ? "bg-green-100 text-green-700"
                               : event.status === "completed"
-                                ? "bg-gray-100 text-gray-600"
-                                : "bg-red-100 text-red-600"
+                              ? "bg-gray-100 text-gray-600"
+                              : "bg-red-100 text-red-600"
                           }`}
                         >
                           {event.status === "upcoming"
                             ? "Upcoming"
                             : event.status === "completed"
-                              ? "Completed"
-                              : "Cancelled"}
+                            ? "Completed"
+                            : "Cancelled"}
                         </div>
                         <div className="flex items-center space-x-1 text-gray-500">
                           <Users size={16} />
@@ -260,18 +263,18 @@ const Events: React.FC = () => {
               Join our community to get notified about upcoming workshops,
               hackathons, and tech talks.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                document
-                  .querySelector("#contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
+            <Link
+              href="https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM"
+              target="_blank"
             >
-              Join Our Community
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
+              >
+                Join Our Community
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

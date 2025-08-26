@@ -5,6 +5,7 @@ import { Linkedin, Github, Twitter, Mail } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getTeamMembers, TeamMember } from "../lib/supabase";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -216,18 +217,18 @@ const Team: React.FC = () => {
               contribute to the tech community and help organize amazing events
               and initiatives.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                document
-                  .querySelector("#contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="bg-google-green text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-green-600 transition-colors"
+            <Link
+              href="https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM"
+              target="_blank"
             >
-              Apply to Join Team
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-google-green text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-green-600 transition-colors"
+              >
+                Apply to Join Team
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

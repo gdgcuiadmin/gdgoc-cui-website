@@ -139,8 +139,9 @@ const Contact: React.FC = () => {
           </p>
         </motion.div>
 
+        {/* COMMENTED OUT - Contact Form and Info Cards */}
+        {/* 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -253,14 +254,12 @@ const Contact: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.6, duration: 0.8 }}
             className="space-y-8"
           >
-            {/* Contact Info Cards */}
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -287,7 +286,6 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -317,7 +315,6 @@ const Contact: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Join Community CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -333,7 +330,7 @@ const Contact: React.FC = () => {
               </p>
               <Link
                 target="_blank"
-                href="https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/"
+                href="https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-campus-lahore-pakistan/"
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -346,6 +343,84 @@ const Contact: React.FC = () => {
             </motion.div>
           </motion.div>
         </div>
+        */}
+
+        {/* Enhanced Social Links Section - Big, Centered, Beautiful */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="flex flex-col items-center justify-center space-y-12"
+        >
+          {/* Social Links Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.1, y: -8 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex flex-col items-center p-8 bg-white rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 min-h-[160px] justify-center"
+                style={
+                  {
+                    "--hover-shadow": `0 25px 50px -12px ${social.color}25`,
+                  } as React.CSSProperties
+                }
+              >
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    backgroundColor: `${social.color}15`,
+                  }}
+                >
+                  <social.icon
+                    size={32}
+                    className="transition-all duration-300"
+                    style={{ color: social.color }}
+                  />
+                </div>
+                <span className="font-google-sans font-semibold text-gray-800 text-center group-hover:text-gray-900 transition-colors">
+                  {social.name}
+                </span>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Join Community CTA - Enhanced */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <div className="bg-gradient-to-r from-google-blue/5 via-google-green/5 to-google-yellow/5 rounded-3xl p-8 border border-gray-100">
+              <h3 className="text-2xl font-google-sans font-bold text-gray-900 mb-4">
+                Ready to Join Our Community?
+              </h3>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                Become part of COMSATS' most active tech community and start
+                your journey with us. Connect, learn, and grow together!
+              </p>
+              <Link
+                target="_blank"
+                href="https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(52, 168, 83, 0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-google-green text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:bg-green-600 transition-all duration-300"
+                >
+                  Join Our Community
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

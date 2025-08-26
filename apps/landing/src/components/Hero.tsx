@@ -54,10 +54,30 @@ const Hero: React.FC = () => {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-80">
-        <div className="absolute top-20 left-10 size-24 border-2 border-black md:size-64 bg-google-red rounded-full lur-none animate-float"></div>
-        <div className="absolute top-32 md:top-40 right-2 border-2 border-black md:right-20 size-24 md:size-96 bg-google-green rounded-full ilter lur-none animate-float"></div>
-        <div className="absolute bottom-20 left-20 size-24 border-2 border-black  md:size-80 bg-google-blue rounded-full ilter lur-none animate-float"></div>
-        <div className="absolute bottom-40 right-10 size-20 md:size-72 border-2 border-black  bg-google-yellow rounded-full ilter lur-none animate-float"></div>
+        <motion.div 
+          className="absolute top-20 left-10 size-24 border-2 border-black md:size-64 bg-google-red rounded-full lur-none animate-float"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1, ease: "backOut" }}
+        ></motion.div>
+        <motion.div 
+          className="absolute top-32 md:top-40 right-2 border-2 border-black md:right-20 size-24 md:size-96 bg-google-green rounded-full ilter lur-none animate-float"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 1.8, duration: 1, ease: "backOut" }}
+        ></motion.div>
+        <motion.div 
+          className="absolute bottom-20 left-20 size-24 border-2 border-black md:size-80 bg-google-blue rounded-full ilter lur-none animate-float"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 2.1, duration: 1, ease: "backOut" }}
+        ></motion.div>
+        <motion.div 
+          className="absolute bottom-40 right-10 size-20 md:size-72 border-2 border-black bg-google-yellow rounded-full ilter lur-none animate-float"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 2.4, duration: 1, ease: "backOut" }}
+        ></motion.div>
       </div>
 
       {/* <div

@@ -5,6 +5,7 @@ import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getUpcomingEvents, Event } from "../lib/supabase";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +50,7 @@ const Events: React.FC = () => {
             start: "top 60%",
             end: "bottom 20%",
           },
-        },
+        }
       );
     }
   }, [events]);
@@ -207,25 +208,25 @@ const Events: React.FC = () => {
               exclusive updates about workshops, hackathons, and tech talks.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .querySelector("#contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
+              <Link
+                href="https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM"
+                target="_blank"
               >
-                Join Our Community
-              </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-google-blue text-white px-8 py-3 rounded-full font-medium shadow-lg hover:bg-blue-600 transition-colors"
+                >
+                  Join Our Community
+                </motion.button>
+              </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
                   window.open(
                     "https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/",
-                    "_blank",
+                    "_blank"
                   )
                 }
                 className="border-2 border-google-green text-green-700 px-8 py-3 rounded-full font-medium hover:bg-google-green hover:text-white transition-all duration-300"
