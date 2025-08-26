@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img width="1828" height="1828" alt="Frame 38" src="https://github.com/user-attachments/assets/dcae7abc-5de9-4416-961e-90c2e2f41fbb" />
+<img width="50" height="50" alt="Frame 38" src="https://github.com/user-attachments/assets/dcae7abc-5de9-4416-961e-90c2e2f41fbb" />
 
 **Google Developer Groups - COMSATS University Islamabad, Lahore Campus**
 
