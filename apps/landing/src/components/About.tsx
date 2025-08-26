@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Target, Heart, Lightbulb, Globe } from "lucide-react";
+import { Target, Heart, Lightbulb, Globe, Users } from "lucide-react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -33,8 +34,7 @@ const About: React.FC = () => {
             end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
-        },
-        {},
+        }
       );
     }
   }, []);
@@ -92,23 +92,28 @@ const About: React.FC = () => {
 
         <div
           ref={sectionRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
         >
           {values.map((value, index) => (
             <motion.div
               key={value.title}
-              className="about-card group p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-xl"
+              className="about-card group p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-2 flex flex-col items-start"
               whileHover={{ y: -5 }}
             >
+              {/* Icon */}
               <div
-                className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-${value.color}/10 mb-6 group-hover:scale-110 transition-transform duration-300`}
+                className={`inline-flex items-center justify-center w-14 h-14 rounded-full bg-${value.color}/10 mb-4 group-hover:scale-110 transition-transform duration-300`}
               >
-                <value.icon className={`w-8 h-8 text-${value.color}`} />
+                <value.icon className={`w-7 h-7 text-${value.color}`} />
               </div>
-              <h3 className="text-xl font-google-sans font-semibold text-gray-900 mb-4">
+
+              {/* Title */}
+              <h3 className="text-lg font-google-sans font-semibold text-gray-900 mb-2">
                 {value.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+
+              {/* Description */}
+              <p className="text-sm text-gray-600 leading-relaxed">
                 {value.description}
               </p>
             </motion.div>
@@ -168,6 +173,25 @@ const About: React.FC = () => {
               <div className="text-gray-600 font-medium">Collaborations</div>
             </div>
           </div>
+        </motion.div>
+
+        {/* Meet Our Team Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          className="text-center mt-12"
+        >
+          <Link
+            href="/team"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-google-blue to-google-green text-white px-8 py-4 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+          >
+            <Users
+              size={20}
+              className="group-hover:scale-110 transition-transform"
+            />
+            Meet Our Amazing Team
+          </Link>
         </motion.div>
       </div>
     </section>

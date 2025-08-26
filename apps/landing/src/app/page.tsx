@@ -11,7 +11,6 @@ import Gallery from "@/components/Gallery";
 import Events from "@/components/Events";
 import Contact from "@/components/Contact";
 import About from "@/components/About";
-import Team from "@/components/Team";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +19,6 @@ export default function Home() {
     // Initialize smooth scrolling and animations
     gsap.config({
       nullTargetWarn: false,
-      trialWarn: false,
     });
 
     // Set up smooth scroll behavior
@@ -56,7 +54,6 @@ export default function Home() {
       <About />
       <Events />
       <Gallery />
-      <Team />
       <Resources />
       <Contact />
     </div>
