@@ -2,16 +2,15 @@
 
 <div align="center">
 
-![GDG COMSATS Logo](https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop&crop=center)
+<img width="1828" height="1828" alt="Frame 38" src="https://github.com/user-attachments/assets/dcae7abc-5de9-4416-961e-90c2e2f41fbb" />
 
 **Google Developer Groups - COMSATS University Islamabad, Lahore Campus**
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/gdg-comsats/website)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/gdg-comsats/website/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/your-site-name/deploys)
 
-[Live Website](https://gdgcomsats.com) • [Admin Panel](https://gdgcomsats.com/admin) • [Documentation](https://docs.gdgcomsats.com) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/)
+[Live Website](https://gdgoc-cui-lahore.vercel.app) • [Admin Panel](https://gdgoc-cui-admin.vercel.app/) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/)
 
 </div>
 
@@ -54,7 +53,6 @@ The GDG COMSATS Website is a modern, responsive web application built for the Go
 - **Photo Gallery**: Event photos organized by collections
 - **Resource Library**: Curated developer resources and tools
 - **Contact System**: Integrated contact form with email notifications
-- **Newsletter**: Community newsletter subscription system
 
 ### 🔧 Admin Panel
 
@@ -310,7 +308,6 @@ The database schema is automatically created using the migration files in `supab
 - **Gallery Images Table**: Event photos and media
 - **Resources Table**: Developer resources and tools
 - **Contact Submissions Table**: Contact form submissions
-- **Newsletter Subscribers Table**: Email subscribers
 
 ### 3. Set Up Row Level Security (RLS)
 
@@ -458,10 +455,6 @@ We welcome contributions from the community! Here's how you can help:
 - Include steps to reproduce
 - Add screenshots when helpful
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🆘 Support
 
 ### Getting Help
@@ -473,7 +466,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Community Links
 
-- **Website**: [gdgcomsats.com](https://gdgcomsats.com)
+- **Website**: [gdgcomsats.com](https://gdgoc-cui-lahore.vercel.app/)
 - **Instagram**: [@gdgoc.cuilhr](https://www.instagram.com/gdgoc.cuilhr/)
 - **LinkedIn**: [GDG COMSATS](https://www.linkedin.com/company/gdsccuilhr)
 - **WhatsApp**: [Community Group](https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM)
@@ -484,6 +477,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ by the GDG COMSATS Team**
 
-[Website](https://gdgcomsats.com) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/) • [GitHub](https://github.com/gdg-comsats)
+[Website](https://gdgcomsats.com) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/) • [GitHub](https://github.com/gdgcuiadmin)
 
 </div>
