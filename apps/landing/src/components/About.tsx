@@ -153,7 +153,7 @@ const About: React.FC = () => {
                 transition={{ delay: 0.8, duration: 0.5 }}
                 className="text-3xl sm:text-4xl font-bold text-google-blue mb-2"
               >
-                2800+
+                3000+
               </motion.div>
               <div className="text-gray-600 font-medium">Community Members</div>
             </div>
@@ -164,7 +164,7 @@ const About: React.FC = () => {
                 transition={{ delay: 1.0, duration: 0.5 }}
                 className="text-3xl sm:text-4xl font-bold text-google-green mb-2"
               >
-                31+
+                30+
               </motion.div>
               <div className="text-gray-600 font-medium">Events Hosted</div>
             </div>

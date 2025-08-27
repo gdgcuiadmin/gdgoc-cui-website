@@ -1,8 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY!;
-
+const supabaseUrl =
+  process.env.SUPABASE_URL || "https://rdwaplvdjhkpufdwdeht.supabase.co";
+const supabaseAnonKey =
+  process.env.SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkd2FwbHZkamhrcHVmZHdkZWh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3MTE1NTIsImV4cCI6MjA2ODI4NzU1Mn0.TXeMgxOsLnhowByTU4kKyOKOb8c89kJQKHxEpz0sYZY";
+  
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Database types
