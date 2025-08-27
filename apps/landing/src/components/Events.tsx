@@ -186,7 +186,7 @@ const Events: React.FC = () => {
                         }}
                         className={`w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300`}
                       >
-                        <span>Stay updated</span>
+                        <span>For details</span>
                         <ExternalLink size={16} />
                       </motion.button>
                     </Link>
