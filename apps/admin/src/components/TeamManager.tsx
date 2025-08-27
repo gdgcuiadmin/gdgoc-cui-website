@@ -278,7 +278,7 @@ const TeamManager: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                required
+                // required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
               />
             </div>
@@ -293,7 +293,7 @@ const TeamManager: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, position: e.target.value })
                 }
-                required
+                // required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
               />
             </div>
@@ -309,7 +309,7 @@ const TeamManager: React.FC = () => {
               onChange={(e) =>
                 setFormData({ ...formData, department: e.target.value })
               }
-              required
+              // required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
             />
           </div>
@@ -323,7 +323,7 @@ const TeamManager: React.FC = () => {
               onChange={(e) =>
                 setFormData({ ...formData, bio: e.target.value })
               }
-              required
+              // required
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
             />
@@ -340,7 +340,7 @@ const TeamManager: React.FC = () => {
                   e.target.files ? e.target.files[0] : null
                 );
               }}
-              required={!editingMember}
+              // required={!editingMember}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-google-blue focus:border-transparent"
             />
             {selectedMemberImage ? (
