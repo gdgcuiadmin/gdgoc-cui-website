@@ -354,7 +354,7 @@ const HackathonPage: React.FC = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="https://tally.so/r/your-form-id"
+                  href="https://tally.so/r/0QOEyN"
                   target="_blank"
                   className="inline-flex items-center justify-center gap-2 bg-google-blue text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:bg-blue-600 hover:shadow-xl transition-all duration-300"
                 >
@@ -973,7 +973,7 @@ const HackathonPage: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="https://tally.so/r/your-form-id"
+                href="https://tally.so/r/0QOEyN"
                 target="_blank"
                 className="inline-flex items-center justify-center gap-3 bg-google-blue text-white px-10 py-5 rounded-lg font-google-sans font-semibold text-xl shadow-xl hover:bg-blue-600 hover:shadow-2xl transition-all duration-300"
               >
