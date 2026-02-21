@@ -4,7 +4,7 @@ import {
   GalleryImage,
   getGalleryImages,
   updateGalleryImage,
-} from "../lib/supabase";
+} from "../lib/db";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useGalleryImages = () => {

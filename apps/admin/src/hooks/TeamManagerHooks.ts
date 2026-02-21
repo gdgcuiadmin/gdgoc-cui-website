@@ -4,7 +4,7 @@ import {
   getAllTeamMembers,
   TeamMember,
   updateTeamMember,
-} from "../lib/supabase";
+} from "../lib/db";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const useTeamMembers = () => {

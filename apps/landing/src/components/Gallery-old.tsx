@@ -8,7 +8,7 @@ import {
   getGalleryImages,
   getEventGalleryImages,
   GalleryImage,
-} from "../lib/supabase";
+} from "../lib/db";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,9 +79,8 @@ const Gallery: React.FC = () => {
         // Add metadata to indicate this represents multiple images
         description:
           eventImages.length > 1
-            ? `${
-                representativeImage.description || representativeImage.title
-              } (${eventImages.length} photos)`
+            ? `${representativeImage.description || representativeImage.title
+            } (${eventImages.length} photos)`
             : representativeImage.description,
       });
     });
@@ -392,11 +391,10 @@ const Gallery: React.FC = () => {
                           <button
                             key={img.id}
                             onClick={() => setSelectedImageIndex(index)}
-                            className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                              index === selectedImageIndex
+                            className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${index === selectedImageIndex
                                 ? "border-white"
                                 : "border-transparent opacity-60 hover:opacity-100"
-                            }`}
+                              }`}
                           >
                             <img
                               src={img.image_url}
@@ -430,4 +428,4 @@ const Gallery: React.FC = () => {
   );
 };
 
-export default Gallery;"
+export default Gallery; "

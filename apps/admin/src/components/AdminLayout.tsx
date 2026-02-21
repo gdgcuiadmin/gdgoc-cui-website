@@ -12,8 +12,7 @@ import {
   X,
   Mail,
 } from "lucide-react";
-import { getCurrentUser, signOut } from "../lib/supabase";
-import GDGLogo from "";
+import { getCurrentUser, signOut } from "../lib/db";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -39,7 +38,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
 
   const handleSignOut = async () => {
     await signOut();
-    window.location.href = "/admin";
+    window.location.href = "/";
   };
 
   const menuItems = [
@@ -56,9 +55,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
     <div className="min-h-screen font-google-sans bg-gray-50 flex">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out lg:translate-x-0`}
       >
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <img
@@ -84,11 +82,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
                 setSidebarOpen(false);
               }}
               whileHover={{ x: 4 }}
-              className={`w-full flex items-center px-6 py-3 text-left transition-colors ${
-                activeTab === item.id
+              className={`w-full flex items-center px-6 py-3 text-left transition-colors ${activeTab === item.id
                   ? "bg-google-blue/10 text-google-blue border-r-2 border-google-blue"
                   : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-              }`}
+                }`}
             >
               <item.icon size={20} className="mr-3" />
               {item.label}
@@ -125,7 +122,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
       {/* Main Content */}
       <div className="flex-1 lg:ml-64">
         {/* Top Bar */}
-        <div className="bg-white fixed z-50 w-full shadow-sm border-b border-gray-200 h-16 flex items-center justify-between px-6">
+        <div className="bg-white fixed z-50 w-full lg:w-[calc(100%-16rem)] shadow-sm border-b border-gray-200 h-16 flex items-center justify-between px-6">
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden text-gray-500 hover:text-gray-700"
@@ -138,8 +135,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
               {activeTab === "dashboard"
                 ? "Dashboard"
                 : activeTab === "contact"
-                ? "Contact & Subscribers"
-                : activeTab}
+                  ? "Contact & Subscribers"
+                  : activeTab}
             </h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-500">

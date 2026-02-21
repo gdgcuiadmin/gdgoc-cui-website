@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { signIn } from "../lib/supabase";
+import { signIn } from "../lib/db";
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -19,10 +19,10 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
     setLoading(true);
     setError("");
 
-    const { error } = await signIn(email, password);
+    const { error: signInError } = await signIn(email, password);
 
-    if (error) {
-      setError(error.message);
+    if (signInError) {
+      setError(signInError?.message || "Login failed. Please try again.");
     } else {
       onLogin();
     }

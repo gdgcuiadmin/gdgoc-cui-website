@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
       { name: "Instagram", href: "https://www.instagram.com/gdgoc.cuilhr/" },
       {
         name: "Whatsapp",
-        url: "https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM",
+        href: "https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM",
       },
     ],
   };
@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex space-x-2 max-md:flex-col items-center justify-center text-sm text-gray-400">
               <div className="flex space-x-2">
-                <span>© 2025 GDG COMSATS. Made with</span>
+                <span>© {new Date().getFullYear()} GDG COMSATS. Made with</span>
                 <Heart size={16} className="text-google-red fill-google-red" />
               </div>
               <span>

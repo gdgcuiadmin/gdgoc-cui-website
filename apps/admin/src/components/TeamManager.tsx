@@ -11,7 +11,7 @@ import {
   Twitter,
 } from "lucide-react";
 import React, { useState } from "react";
-import { TeamMember, uploadFile } from "../lib/supabase";
+import { TeamMember, uploadFile } from "../lib/db";
 import Modal from "./shared/Modal";
 import {
   useCreateTeamMember,
@@ -178,17 +178,15 @@ const TeamManager: React.FC = () => {
             key={member.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`bg-white rounded-xl shadow-lg p-6 border border-gray-100 ${
-              !member.active ? "opacity-60" : ""
-            }`}
+            className={`bg-white rounded-xl shadow-lg p-6 border border-gray-100 ${!member.active ? "opacity-60" : ""
+              }`}
           >
             <div className="flex justify-between items-start mb-4">
               <div
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  member.active
+                className={`px-3 py-1 rounded-full text-sm font-medium ${member.active
                     ? "bg-green-100 text-green-700"
                     : "bg-gray-100 text-gray-600"
-                }`}
+                  }`}
               >
                 {member.active ? "Active" : "Inactive"}
               </div>

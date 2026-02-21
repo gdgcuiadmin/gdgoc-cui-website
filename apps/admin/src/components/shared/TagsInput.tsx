@@ -7,7 +7,7 @@ interface TagsInputProps {
 const TagsInput: React.FC<TagsInputProps> = ({ tags, setTags }) => {
   const [inputValue, setInputValue] = useState("");
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const trimmed = inputValue.trim();
 
     // When user presses comma or enter

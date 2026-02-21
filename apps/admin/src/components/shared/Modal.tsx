@@ -5,7 +5,7 @@ interface ModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   children: React.ReactNode;
-  reset: () => void;
+  reset?: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ open, setOpen, reset, children }) => {
@@ -31,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({ open, setOpen, reset, children }) => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
         setOpen(false);
-        reset();
+        reset?.();
       }
     };
 
@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ open, setOpen, reset, children }) => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         setOpen(false);
-        reset();
+        reset?.();
       }
     };
 

@@ -5,13 +5,8 @@ import {
   Users,
   Image,
   BookOpen,
-  TrendingUp,
-  Eye,
-  Mail,
-  UserPlus,
 } from "lucide-react";
-import { getWebsiteStats } from "../lib/supabase";
-import { Link } from "react-router-dom";
+import { getWebsiteStats } from "../lib/db";
 
 const AdminDashboard: React.FC = () => {
   const [stats, setStats] = useState({

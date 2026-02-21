@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Github, Twitter, Mail, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { getTeamMembers, TeamMember } from "../../lib/supabase";
+import { getTeamMembers, TeamMember } from "../../lib/db";
 import Image from "next/image";
 
 const TeamPage: React.FC = () => {

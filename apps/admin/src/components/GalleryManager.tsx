@@ -8,7 +8,7 @@ import {
   Trash2,
 } from "lucide-react";
 import React, { useState } from "react";
-import { GalleryImage, uploadFile } from "../lib/supabase";
+import { GalleryImage, uploadFile } from "../lib/db";
 import Modal from "./shared/Modal";
 import {
   useGalleryImages,
@@ -39,7 +39,7 @@ const GalleryManager: React.FC = () => {
     description: "",
     image_url: "",
     alt_text: "",
-    event_id: null,
+    event_id: "",
     category: "workshops",
     order_index: 0,
     featured: false,
@@ -114,7 +114,7 @@ const GalleryManager: React.FC = () => {
       description: "",
       image_url: "",
       alt_text: "",
-      event_id: null,
+      event_id: "",
       category: "",
       order_index: 0,
       featured: false,
@@ -131,7 +131,7 @@ const GalleryManager: React.FC = () => {
       description: image.description || "",
       image_url: image.image_url,
       alt_text: image.alt_text,
-      event_id: image.event_id || null,
+      event_id: image.event_id || "",
       category: image.category,
       order_index: image.order_index,
       featured: image.featured,
@@ -242,11 +242,10 @@ const GalleryManager: React.FC = () => {
                       <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
                         <button
                           onClick={() => toggleFeatured(image)}
-                          className={`p-1.5 rounded-full transition-colors ${
-                            image.featured
-                              ? "bg-google-yellow text-white"
-                              : "bg-white/20 text-white hover:bg-google-yellow"
-                          }`}
+                          className={`p-1.5 rounded-full transition-colors ${image.featured
+                            ? "bg-google-yellow text-white"
+                            : "bg-white/20 text-white hover:bg-google-yellow"
+                            }`}
                           title={
                             image.featured
                               ? "Remove from featured"

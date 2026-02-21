@@ -10,7 +10,7 @@ import {
   Users,
   Link as LinkIcon,
 } from "lucide-react";
-import { Event, uploadFile } from "../lib/supabase";
+import { Event, uploadFile } from "../lib/db";
 import Modal from "./shared/Modal";
 import {
   useEvents,
@@ -160,11 +160,10 @@ const EventsManager: React.FC = () => {
           >
             <div className="flex justify-between items-start mb-4">
               <div
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  event.status === "upcoming"
+                className={`px-3 py-1 rounded-full text-sm font-medium ${event.status === "upcoming"
                     ? "bg-green-100 text-green-700"
                     : "bg-gray-100 text-gray-600"
-                }`}
+                  }`}
               >
                 {event.status}
               </div>
