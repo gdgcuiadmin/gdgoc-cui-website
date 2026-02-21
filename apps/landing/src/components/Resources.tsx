@@ -13,7 +13,7 @@ import {
   Globe,
   ChevronRight,
 } from "lucide-react";
-import { getResources, Resource } from "../lib/supabase";
+import { getResources, Resource } from "../lib/db";
 
 const Resources: React.FC = () => {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -29,26 +29,35 @@ const Resources: React.FC = () => {
   }, []);
 
   const fetchResources = async () => {
-    setLoading(true);
-    const { data, error } = await getResources();
-    if (data && !error) {
-      setResources(data);
-      // Set first category as active if resources exist
-      if (data.length > 0) {
-        const categories = [...new Set(data.map((r) => r.category))];
-        setActiveCategory(categories[0]);
+    try {
+      setLoading(true);
+      const { data, error } = await getResources();
+      if (data && !error) {
+        setResources(data);
+        if (data.length > 0) {
+          const uniqueCategories = [...new Set(data.map((r) => r.category || "Learning Resources"))];
+          // Prefer "Android Development" or "Web Development" if available, else first one
+          const defaultCat = uniqueCategories.includes("Android Development")
+            ? "Android Development"
+            : uniqueCategories[0];
+          setActiveCategory(defaultCat);
+        }
       }
+    } catch (err) {
+      console.error("Error in fetchResources:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  // Group resources by category
+  // Group resources by category with safety
   const groupedResources = resources.reduce(
     (acc, resource) => {
-      if (!acc[resource.category]) {
-        acc[resource.category] = [];
+      const cat = resource.category || "Learning Resources";
+      if (!acc[cat]) {
+        acc[cat] = [];
       }
-      acc[resource.category].push(resource);
+      acc[cat].push(resource);
       return acc;
     },
     {} as Record<string, Resource[]>,
@@ -69,10 +78,10 @@ const Resources: React.FC = () => {
       Globe,
       ExternalLink,
     };
-    return icons[iconName] || ExternalLink;
+    return icons[iconName] || BookOpen;
   };
 
-  // Category icons and colors
+  // Category icons and colors with robust matching
   const getCategoryConfig = (category: string) => {
     const configs: Record<
       string,
@@ -116,6 +125,13 @@ const Resources: React.FC = () => {
         gradient: "from-blue-400 to-blue-600",
       }
     );
+  };
+
+  // Helper for dynamic colors to ensure Tailwind pick-up or CSS variables
+  const getDynamicColorClass = (color: string, prefix: string) => {
+    // Tailwind 4 might need full classes if not safelisted
+    // But since we define them in globals.css, we can return the full class name
+    return `${prefix}-${color}`;
   };
 
   if (loading) {
@@ -185,18 +201,17 @@ const Resources: React.FC = () => {
                       transition={{ delay: index * 0.1, duration: 0.5 }}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`flex-shrink-0 flex items-center space-x-3 px-6 py-4 font-medium text-sm transition-all duration-300 border-b-2 ${
-                        isActive
-                          ? `text-${config.color} border-${config.color} bg-white`
+                      className={`flex-shrink-0 flex items-center space-x-3 px-6 py-4 font-medium text-sm transition-all duration-300 border-b-2 ${isActive
+                          ? `${getDynamicColorClass(config.color, "text")} ${getDynamicColorClass(config.color, "border")} bg-white`
                           : "text-gray-600 border-transparent hover:text-gray-900 hover:bg-white/50"
-                      }`}
+                        }`}
                     >
                       <IconComponent size={18} />
                       <span className="whitespace-nowrap">{category}</span>
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className={`w-2 h-2 rounded-full bg-${config.color}`}
+                          className={`w-2 h-2 rounded-full ${getDynamicColorClass(config.color, "bg")}`}
                         />
                       )}
                     </motion.button>
@@ -244,6 +259,7 @@ const Resources: React.FC = () => {
                     {groupedResources[activeCategory]?.map(
                       (resource, index) => {
                         const IconComponent = getIcon(resource.icon);
+                        const resourceColor = resource.color || "google-blue";
 
                         return (
                           <motion.a
@@ -266,7 +282,7 @@ const Resources: React.FC = () => {
                             <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
                               <IconComponent
                                 size={128}
-                                className={`text-${resource.color}`}
+                                className={getDynamicColorClass(resourceColor, "text")}
                               />
                             </div>
 
@@ -274,10 +290,10 @@ const Resources: React.FC = () => {
                             <div className="relative z-10">
                               <div className="flex items-start justify-between mb-4">
                                 <div
-                                  className={`w-12 h-12 rounded-xl bg-${resource.color}/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                                  className={`w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
                                 >
                                   <IconComponent
-                                    className={`w-6 h-6 text-${resource.color}`}
+                                    className={`w-6 h-6 ${getDynamicColorClass(resourceColor, "text")}`}
                                   />
                                 </div>
 
@@ -299,7 +315,7 @@ const Resources: React.FC = () => {
                               </div>
 
                               <h4
-                                className={`font-google-sans font-semibold text-lg text-gray-900 mb-2 group-hover:text-${resource.color} transition-colors`}
+                                className={`font-google-sans font-semibold text-lg text-gray-900 mb-2 transition-colors`}
                               >
                                 {resource.name}
                               </h4>
@@ -319,7 +335,7 @@ const Resources: React.FC = () => {
 
                             {/* Hover Gradient */}
                             <div
-                              className={`absolute inset-0 bg-gradient-to-r from-${resource.color}/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                              className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
                             />
                           </motion.a>
                         );

@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 import { initEmailJS } from "../lib/emailjs";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Resources from "@/components/Resources";
 import Gallery from "@/components/Gallery";

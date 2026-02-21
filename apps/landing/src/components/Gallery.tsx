@@ -4,13 +4,13 @@ import { useInView } from "react-intersection-observer";
 import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getEvents, Event } from "../lib/supabase";
+import { getGalleryImages, GalleryImage } from "../lib/db";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Gallery: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [events, setGalleryImages] = useState<Event[]>([]);
+  const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
 
   const { ref, inView } = useInView({
@@ -24,20 +24,19 @@ const Gallery: React.FC = () => {
 
   const fetchGalleryImages = async () => {
     setLoading(true);
-    const { data, error } = await getEvents();
+    const { data, error } = await getGalleryImages();
     if (data && !error) {
-      // Process images to show only one representative image per event
-      setGalleryImages(data);
+      setImages(data);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    if (sectionRef.current && events.length > 0) {
-      const images = sectionRef.current.querySelectorAll(".gallery-item");
+    if (sectionRef.current && images.length > 0) {
+      const items = sectionRef.current.querySelectorAll(".gallery-item");
 
       gsap.fromTo(
-        images,
+        items,
         { y: 60, opacity: 0, scale: 0.8 },
         {
           y: 0,
@@ -54,7 +53,7 @@ const Gallery: React.FC = () => {
         },
       );
     }
-  }, [events]);
+  }, [images]);
 
   if (loading) {
     return (
@@ -95,7 +94,7 @@ const Gallery: React.FC = () => {
           </p>
         </motion.div>
 
-        {events.length === 0 ? (
+        {images.length === 0 ? (
           <div className="text-center py-16">
             <ImageIcon size={64} className="mx-auto text-gray-300 mb-4" />
             <h3 className="text-xl font-google-sans font-semibold text-gray-600 mb-2">
@@ -110,45 +109,48 @@ const Gallery: React.FC = () => {
             ref={sectionRef}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {events
-              .filter((event) => event.status === "completed")
-              .map((event, index) => (
-                <motion.div
-                  key={event.id}
-                  className="gallery-item group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
-                  whileHover={{ y: -5 }}
-                  onClick={() => window.open(event.registration_url, "_blank")}
-                >
-                  <div className="aspect-w-16 aspect-h-12 relative overflow-hidden">
-                    <img
-                      src={
-                        event.image_url ||
-                        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
-                      }
-                      alt={"Event event"}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparen to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {images.map((image, index) => (
+              <motion.div
+                key={image.id}
+                className="gallery-item group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
+                whileHover={{ y: -5 }}
+              >
+                <div className="aspect-w-16 aspect-h-12 relative overflow-hidden">
+                  <img
+                    src={
+                      image.image_url ||
+                      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
+                    }
+                    alt={image.alt_text || "Gallery image"}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    {/* event Info Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="font-google-sans font-semibold text-lg mb-1">
-                        {event.title}
-                      </h3>
-                      {event.description && (
-                        <p className="text-sm text-gray-200 mb-2">
-                          {event.description}
-                        </p>
+                  {/* image Info Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-google-sans font-semibold text-lg mb-1">
+                      {image.title}
+                    </h3>
+                    {image.description && (
+                      <p className="text-sm text-gray-200 mb-2 line-clamp-2">
+                        {image.description}
+                      </p>
+                    )}
+                    <div className="flex items-center justify-between text-xs text-gray-300">
+                      <span>{image.category}</span>
+                      {image.event?.date && (
+                        <>
+                          <span>•</span>
+                          <span>
+                            {new Date(image.event.date).toLocaleDateString()}
+                          </span>
+                        </>
                       )}
-                      <div className="flex items-center space-x-2 text-xs text-gray-300">
-                        <span>{event.title}</span>
-                        <span>•</span>
-                        <span>{new Date(event.date).toLocaleDateString()}</span>
-                      </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
         )}
       </div>

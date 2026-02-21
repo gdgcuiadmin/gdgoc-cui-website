@@ -5,7 +5,7 @@ import {
   updateEvent,
   deleteEvent,
   Event,
-} from "../lib/supabase";
+} from "../lib/db";
 
 const useEvents = () => {
   return useQuery({
@@ -48,4 +48,4 @@ const useDeleteEvent = () => {
   });
 };
 
-export { useCreateEvent, useDeleteEvent, useEvents,useUpdateEvent };
+export { useCreateEvent, useDeleteEvent, useEvents, useUpdateEvent };

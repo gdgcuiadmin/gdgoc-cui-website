@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Linkedin, Github, Twitter, Mail } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getTeamMembers, TeamMember } from "../lib/supabase";
+import { getTeamMembers, TeamMember } from "../lib/db";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);

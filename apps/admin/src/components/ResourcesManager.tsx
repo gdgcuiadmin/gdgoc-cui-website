@@ -15,7 +15,7 @@ import {
   Palette,
   Globe,
 } from "lucide-react";
-import { Resource } from "../lib/supabase";
+import { Resource } from "../lib/db";
 import Modal from "./shared/Modal";
 import {
   useResources,
@@ -226,11 +226,10 @@ const ResourcesManager: React.FC = () => {
                         <div className="flex space-x-1">
                           <button
                             onClick={() => toggleFeatured(resource)}
-                            className={`p-1 rounded transition-colors ${
-                              resource.featured
+                            className={`p-1 rounded transition-colors ${resource.featured
                                 ? "text-google-yellow"
                                 : "text-gray-400 hover:text-google-yellow"
-                            }`}
+                              }`}
                             title={
                               resource.featured
                                 ? "Remove from featured"

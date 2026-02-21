@@ -5,7 +5,7 @@ import {
   updateResource,
   deleteResource,
   Resource,
-} from "../lib/supabase";
+} from "../lib/db";
 
 const useResources = () => {
   return useQuery({

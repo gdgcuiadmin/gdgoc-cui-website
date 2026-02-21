@@ -6,22 +6,22 @@
   "scripts": {
     "dev:landing": "pnpm --filter landing dev",
     "dev:admin": "pnpm --filter admin dev",
-    "dev": "pnpm --parallel dev:landing dev:admin"
+    "dev": "pnpm -r --parallel dev"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "dependencies": {
-    "tailwind-scrollbar-hide": "^4.0.0",
-    "react-intersection-observer": "^9.5.2",
-    "react-icons": "^5.5.0",
-    "lucide-react": "0.344.0",
-    "locomotive-scroll": "^4.1.4",
-    "gsap": "^3.12.2",
+    "firebase": "^12.9.0",
     "framer-motion": "^10.16.4",
-    "@supabase/supabase-js": "^2.39.0",
-    "react-hot-toast": "^2.5.2"
+    "gsap": "^3.12.2",
+    "locomotive-scroll": "^4.1.4",
+    "lucide-react": "0.344.0",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.5.2",
+    "tailwind-scrollbar-hide": "^4.0.0"
   },
   "keywords": [],
   "author": "",

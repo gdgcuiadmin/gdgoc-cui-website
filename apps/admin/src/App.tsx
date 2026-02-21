@@ -1,5 +1,3 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
@@ -9,11 +7,9 @@ import TeamManager from "./components/TeamManager";
 import GalleryManager from "./components/GalleryManager";
 import ResourcesManager from "./components/ResourcesManager";
 import AdminLayout from "./components/AdminLayout";
-import { getCurrentUser } from "./lib/supabase";
-import { User } from "@supabase/supabase-js";
+import { getCurrentUser } from "./lib/db";
+import { User } from "firebase/auth";
 import AdminLogin from "./components/AdminLogin";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const queryClient = new QueryClient();
 
@@ -36,36 +32,6 @@ function App() {
     checkUser();
   };
 
-  useEffect(() => {
-    // Initialize smooth scrolling and animations
-    gsap.config({
-      nullTargetWarn: false,
-      trialWarn: false,
-    });
-
-    // Set up smooth scroll behavior
-    const smoothScroll = (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === "A" &&
-        target.getAttribute("href")?.startsWith("#")
-      ) {
-        e.preventDefault();
-        const targetId = target.getAttribute("href")?.substring(1);
-        const element = document.getElementById(targetId || "");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-
-    document.addEventListener("click", smoothScroll);
-
-    return () => {
-      document.removeEventListener("click", smoothScroll);
-    };
-  }, []);
-
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -82,6 +48,17 @@ function App() {
         return <AdminDashboard />;
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="loading-spinner mx-auto mb-4"></div>
+          <p className="text-gray-500">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
     return <AdminLogin onLogin={handleLogin} />;

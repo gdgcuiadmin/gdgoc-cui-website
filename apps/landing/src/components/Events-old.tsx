@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getEvents, Event } from "../lib/supabase";
+import { getEvents, Event } from "../lib/db";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -134,7 +134,7 @@ const Events: React.FC = () => {
                     // On mobile: full width, on lg: alternating layout
                     "lg:flex lg:items-center " +
                     (index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse")
-                  }`}
+                    }`}
                   whileHover={{ scale: 1.02 }}
                 >
                   {/* Timeline Dot - Only visible on large screens */}
@@ -144,26 +144,24 @@ const Events: React.FC = () => {
 
                   {/* Event Card */}
                   <div
-                    className={`w-full lg:w-5/12 ${
-                      index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"
-                    }`}
+                    className={`w-full lg:w-5/12 ${index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"
+                      }`}
                   >
                     <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                       <div className="flex items-center justify-between mb-4">
                         <div
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            event.status === "upcoming"
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${event.status === "upcoming"
                               ? "bg-green-100 text-green-700"
                               : event.status === "completed"
-                              ? "bg-gray-100 text-gray-600"
-                              : "bg-red-100 text-red-600"
-                          }`}
+                                ? "bg-gray-100 text-gray-600"
+                                : "bg-red-100 text-red-600"
+                            }`}
                         >
                           {event.status === "upcoming"
                             ? "Upcoming"
                             : event.status === "completed"
-                            ? "Completed"
-                            : "Cancelled"}
+                              ? "Completed"
+                              : "Cancelled"}
                         </div>
                         <div className="flex items-center space-x-1 text-gray-500">
                           <Users size={16} />

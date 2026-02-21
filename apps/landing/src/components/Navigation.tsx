@@ -41,6 +41,15 @@ const Navigation: React.FC = () => {
   const handleNavigation = (href: string) => {
     if (href.startsWith("#")) {
       scrollToSection(href);
+    } else if (href.startsWith("/#")) {
+      // On home page, scroll to section; on other pages, navigate home then scroll
+      const hash = href.substring(1); // e.g. "#about"
+      if (window.location.pathname === "/") {
+        scrollToSection(hash);
+      } else {
+        router.push(href);
+        setIsOpen(false);
+      }
     } else {
       router.push(href);
       setIsOpen(false);

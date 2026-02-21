@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gdgoc-cui-lahore.vercel.app"),
   title: "GDG COMSATS - Google Developer Groups",
   description:
     "Google Developer Groups COMSATS University Islamabad, Lahore Campus. Join Pakistan's most active tech community for workshops, hackathons, and developer events.",
@@ -114,7 +115,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-google-sans  antialiased`}>
+      <body className={`font-google-sans antialiased`}>
         <Navigation />
         {children}
         <Footer />

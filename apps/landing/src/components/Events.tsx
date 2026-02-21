@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getUpcomingEvents, Event } from "../lib/supabase";
+import { getUpcomingEvents, Event } from "../lib/db";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -115,7 +115,7 @@ const Events: React.FC = () => {
                       src={
                         event.image_url ||
                         "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
-                      }s
+                      }
                       alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -159,7 +159,7 @@ const Events: React.FC = () => {
                       {event.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className={`px-2 py-1 text-xs rounded-full bg-${event.color}/10 text-${event.color} font-medium`}
+                          className="px-2 py-1 text-xs rounded-full bg-google-blue/10 text-google-blue font-medium"
                         >
                           {tag}
                         </span>
@@ -172,24 +172,20 @@ const Events: React.FC = () => {
                     </div>
 
                     {/* Register Button */}
-                    <Link
-                      href="https://www.instagram.com/gdgoc.cuilhr/"
+                    <motion.a
+                      href={event.registration_url || "https://www.instagram.com/gdgoc.cuilhr/"}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => {
-                          if (event.registration_url) {
-                            window.open(event.registration_url, "_blank");
-                          }
-                        }}
-                        className={`w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300`}
+                        className="w-full cursor-pointer bg-google-green text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <span>For details</span>
                         <ExternalLink size={16} />
                       </motion.button>
-                    </Link>
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>

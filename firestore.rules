@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Events rules
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Team members rules
+    match /team_members/{memberId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Gallery images rules
+    match /gallery_images/{imageId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Resources rules
+    match /resources/{resourceId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Newsletter subscribers rules
+    match /newsletter_subscribers/{subscriberId} {
+      allow read: if false;
+      allow create: if true;
+      allow write: if isAuthenticated();
+    }
+  }
+}
