@@ -6,6 +6,7 @@ import {
   Users,
   Image,
   BookOpen,
+  Award,
   Settings,
   LogOut,
   Menu,
@@ -47,6 +48,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
     { id: "team", label: "Team Members", icon: Users },
     { id: "gallery", label: "Gallery", icon: Image },
     { id: "resources", label: "Resources", icon: BookOpen },
+    { id: "certifications", label: "Certifications", icon: Award },
     // { id: 'contact', label: 'Contact & Subscribers', icon: Mail },
     // { id: 'settings', label: 'Settings', icon: Settings },
   ];

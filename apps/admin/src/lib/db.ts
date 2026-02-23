@@ -503,6 +503,113 @@ export const uploadFile = async (
 
 
 
+// Certificate types and CRUD
+export interface CertificateAttendee {
+  name: string;
+  email: string;
+}
+
+export interface EventCertificate {
+  id: string;
+  event_id: string;
+  event_title: string;
+  template_base64: string;
+  attendees: CertificateAttendee[];
+  created_at: string;
+  updated_at: string;
+}
+
+export const uploadRawFile = async (
+  filePrefix: string,
+  file: File,
+  name: string,
+) => {
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+  const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+  if (!cloudName || !uploadPreset) {
+    throw new Error("Cloudinary configuration missing.");
+  }
+
+  // Keep the .pdf extension so Cloudinary serves the file with the correct content type
+  const publicId = name.endsWith(".pdf") ? name : `${name}.pdf`;
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", uploadPreset);
+  formData.append("folder", filePrefix);
+  formData.append("public_id", publicId);
+  formData.append("access_mode", "public");
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`,
+    { method: "POST", body: formData }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error?.message || "Cloudinary upload failed");
+  }
+
+  const data = await response.json();
+  return data.secure_url;
+};
+
+export const getEventCertificates = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "event_certificates"));
+    const data = querySnapshot.docs.map(
+      (doc) => ({ id: doc.id, ...doc.data() } as EventCertificate)
+    );
+    return { data, error: null };
+  } catch (error: any) {
+    console.error("Error fetching certificates:", error);
+    return { data: null, error };
+  }
+};
+
+export const createEventCertificate = async (
+  certificate: Omit<EventCertificate, "id" | "created_at" | "updated_at">
+) => {
+  try {
+    const docRef = await addDoc(collection(db, "event_certificates"), {
+      ...certificate,
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
+    });
+    const docSnap = await getDoc(docRef);
+    return { data: { id: docRef.id, ...docSnap.data() }, error: null };
+  } catch (error: any) {
+    return { data: null, error };
+  }
+};
+
+export const updateEventCertificate = async (
+  id: string,
+  certificate: Partial<EventCertificate>
+) => {
+  try {
+    const docRef = doc(db, "event_certificates", id);
+    await updateDoc(docRef, {
+      ...certificate,
+      updated_at: serverTimestamp(),
+    });
+    const docSnap = await getDoc(docRef);
+    return { data: { id, ...docSnap.data() }, error: null };
+  } catch (error: any) {
+    return { data: null, error };
+  }
+};
+
+export const deleteEventCertificate = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, "event_certificates", id));
+    return { error: null };
+  } catch (error: any) {
+    return { data: null, error };
+  }
+};
+
 // Statistics functions
 export const getWebsiteStats = async () => {
   const [
