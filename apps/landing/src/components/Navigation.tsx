@@ -23,6 +23,7 @@ const Navigation: React.FC = () => {
   const navItems = [
     { name: "About", href: "/#about", icon: Users },
     { name: "Events", href: "/#events", icon: Calendar },
+    { name: "Hackathon", href: "/hackathon", icon: Calendar },
     { name: "Team", href: "/team", icon: Users },
     { name: "Gallery", href: "/#gallery", icon: Camera },
     { name: "Resources", href: "/#resources", icon: BookOpen },
