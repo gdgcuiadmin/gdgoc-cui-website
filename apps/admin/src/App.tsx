@@ -6,6 +6,7 @@ import EventsManager from "./components/EventsManager";
 import TeamManager from "./components/TeamManager";
 import GalleryManager from "./components/GalleryManager";
 import ResourcesManager from "./components/ResourcesManager";
+import CertificationsManager from "./components/CertificationsManager";
 import AdminLayout from "./components/AdminLayout";
 import { getCurrentUser } from "./lib/db";
 import { User } from "firebase/auth";
@@ -44,6 +45,8 @@ function App() {
         return <GalleryManager />;
       case "resources":
         return <ResourcesManager />;
+      case "certifications":
+        return <CertificationsManager />;
       default:
         return <AdminDashboard />;
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Users, Calendar, Camera, BookOpen, Mail } from "lucide-react";
+import { Menu, X, Users, Calendar, Camera, BookOpen, Mail, Award } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import GDGLogo from "../../public/assets/Horizontal - Light.png";
 import Image from "next/image";
@@ -27,6 +27,7 @@ const Navigation: React.FC = () => {
     { name: "Team", href: "/team", icon: Users },
     { name: "Gallery", href: "/#gallery", icon: Camera },
     { name: "Resources", href: "/#resources", icon: BookOpen },
+    { name: "Certificates", href: "/certificates", icon: Award },
     { name: "Contact", href: "/contact", icon: Mail },
   ];
 

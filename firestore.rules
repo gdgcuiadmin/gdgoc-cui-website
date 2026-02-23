@@ -31,6 +31,12 @@ service cloud.firestore {
       allow write: if isAuthenticated();
     }
 
+    // Event certificates rules
+    match /event_certificates/{certId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
     // Newsletter subscribers rules
     match /newsletter_subscribers/{subscriberId} {
       allow read: if false;

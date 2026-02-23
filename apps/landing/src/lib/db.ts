@@ -503,6 +503,44 @@ export const uploadFile = async (
 
 
 
+// Certificate types and queries
+export interface CertificateAttendee {
+  name: string;
+  email: string;
+}
+
+export interface EventCertificate {
+  id: string;
+  event_id: string;
+  event_title: string;
+  template_base64: string;
+  attendees: CertificateAttendee[];
+  created_at: string;
+  updated_at: string;
+}
+
+export const getEventCertificates = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "event_certificates"));
+    const data = querySnapshot.docs.map(
+      (doc) => ({ id: doc.id, ...doc.data() } as EventCertificate)
+    );
+    return { data, error: null };
+  } catch (error: any) {
+    console.error("Error fetching certificates:", error);
+    return { data: null, error };
+  }
+};
+
+export const findAttendeeByEmail = (
+  certificate: EventCertificate,
+  email: string
+): CertificateAttendee | undefined => {
+  return certificate.attendees.find(
+    (a) => a.email.toLowerCase().trim() === email.toLowerCase().trim()
+  );
+};
+
 // Statistics functions
 export const getWebsiteStats = async () => {
   const [
