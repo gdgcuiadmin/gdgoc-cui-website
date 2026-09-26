@@ -385,7 +385,7 @@ const Resources: React.FC = () => {
                     "_blank",
                   )
                 }
-                className="border-2 border-google-green text-google-green px-8 py-3 rounded-full font-medium hover:bg-google-green hover:text-white transition-all duration-300"
+                className="border-2 border-google-green text-green-700 px-8 py-3 rounded-full font-medium hover:bg-google-green hover:text-white transition-all duration-300"
               >
                 Follow on GDG Platform
               </motion.button>
