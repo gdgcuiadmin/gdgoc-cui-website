@@ -1,482 +1,207 @@
-# GDG COMSATS Website
+# GDG COMSATS — Website
 
 <div align="center">
 
-<img width="50" height="50" alt="Frame 38" src="https://github.com/user-attachments/assets/dcae7abc-5de9-4416-961e-90c2e2f41fbb" />
+<img width="50" height="50" alt="GDG COMSATS logo" src="https://github.com/user-attachments/assets/dcae7abc-5de9-4416-961e-90c2e2f41fbb" />
 
-**Google Developer Groups - COMSATS University Islamabad, Lahore Campus**
+**Google Developer Groups on Campus**
+COMSATS University Islamabad, Lahore Campus
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/gdg-comsats/website)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/gdg-comsats/website/releases)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-[Live Website](https://gdgoc-cui-lahore.vercel.app) • [Admin Panel](https://gdgoc-cui-admin.vercel.app/) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/)
+[Live site](https://gdgoc-cui-lahore.vercel.app) · [Community page](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/) · [Instagram](https://www.instagram.com/gdgoc.cuilhr/) · [LinkedIn](https://www.linkedin.com/company/gdsccuilhr) · [WhatsApp](https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM)
 
 </div>
 
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [Features](#-features)
-- [Technology Stack](#-technology-stack)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Project Structure](#-project-structure)
-- [Development](#-development)
-- [Environment Variables](#-environment-variables)
-- [Database Setup](#-database-setup)
-- [Email Configuration](#-email-configuration)
-- [Deployment](#-deployment)
-- [Admin Panel](#-admin-panel)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Support](#-support)
-
-## 🚀 Overview
-
-The GDG COMSATS Website is a modern, responsive web application built for the Google Developer Groups chapter at COMSATS University Islamabad, Lahore Campus. It serves as the central hub for our tech community, featuring event management, team showcases, resource sharing, and community engagement tools.
-
-### Key Objectives
-
-- **Community Building**: Connect students and tech enthusiasts
-- **Event Management**: Showcase workshops, hackathons, and tech talks
-- **Resource Sharing**: Provide access to Google's developer tools and learning materials
-- **Team Showcase**: Highlight our dedicated team members and their contributions
-
-## ✨ Features
-
-### 🌐 Public Website
-
-- **Responsive Design**: Mobile-first approach with beautiful animations
-- **Event Showcase**: Dynamic event listings with registration links
-- **Team Profiles**: Interactive team member cards with social links
-- **Photo Gallery**: Event photos organized by collections
-- **Resource Library**: Curated developer resources and tools
-- **Contact System**: Integrated contact form with email notifications
-
-### 🔧 Admin Panel
-
-- **Content Management**: Full CRUD operations for all content
-- **Event Management**: Create, edit, and manage events
-- **Team Management**: Add and manage team member profiles
-- **Gallery Management**: Upload and organize event photos
-- **Resource Management**: Curate and categorize developer resources
-- **Contact Management**: View and respond to contact submissions
-- **Analytics Dashboard**: Website statistics and insights
-
-### 🎨 Design Features
-
-- **Google Material Design**: Consistent with Google's design principles
-- **Smooth Animations**: GSAP-powered animations and transitions
-- **Dark/Light Theme**: Automatic theme detection and switching
-- **Accessibility**: WCAG 2.1 compliant with proper ARIA labels
-- **SEO Optimized**: Meta tags, structured data, and sitemap
-
-## 🛠 Technology Stack
-
-### Frontend
-
-- **React 18** - Modern React with hooks and concurrent features
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library for React
-- **GSAP** - Professional-grade animation library
-- **React Router** - Client-side routing
-- **Lucide React** - Beautiful icon library
-
-### Backend & Database
-
-- **Supabase** - Backend-as-a-Service platform
-- **PostgreSQL** - Relational database
-- **Row Level Security** - Database-level security policies
-- **Real-time Subscriptions** - Live data updates
-
-### Development Tools
-
-- **Vite** - Fast build tool and development server
-- **ESLint** - Code linting and formatting
-- **PostCSS** - CSS processing and optimization
-- **Autoprefixer** - Automatic CSS vendor prefixing
-
-### Services & Integrations
-
-- **EmailJS** - Client-side email sending
-- **Netlify** - Static site hosting and deployment
-- **Google Fonts** - Typography (Google Sans, Roboto)
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- **Node.js** (v18.0.0 or higher)
-- **npm** (v8.0.0 or higher) or **yarn** (v1.22.0 or higher)
-- **Git** (v2.30.0 or higher)
-
-### Recommended Tools
-
-- **VS Code** with the following extensions:
-  - ES7+ React/Redux/React-Native snippets
-  - Tailwind CSS IntelliSense
-  - TypeScript Importer
-  - Prettier - Code formatter
-
-## 🚀 Installation
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/gdg-comsats/website.git
-cd gdg-comsats-website
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-# or
-yarn install
-```
-
-### 3. Environment Setup
-
-```bash
-# Copy the environment template
-cp .env.example .env
-
-# Edit the environment variables
-nano .env
-```
-
-### 4. Database Setup
-
-```bash
-# The database will be automatically set up when you configure Supabase
-# See the Database Setup section below for detailed instructions
-```
-
-### 5. Start Development Server
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-The application will be available at `http://localhost:5173`
-
-## 📁 Project Structure
-
-```
-gdg-comsats-website/
-├── public/                     # Static assets
-│   ├── vite.svg               # Vite logo
-│   └── favicon.ico            # Website favicon
-├── src/                       # Source code
-│   ├── components/            # React components
-│   │   ├── admin/            # Admin panel components
-│   │   │   ├── AdminApp.tsx
-│   │   │   ├── AdminDashboard.tsx
-│   │   │   ├── AdminLayout.tsx
-│   │   │   ├── AdminLogin.tsx
-│   │   │   ├── ContactManager.tsx
-│   │   │   ├── EventsManager.tsx
-│   │   │   ├── GalleryManager.tsx
-│   │   │   ├── ResourcesManager.tsx
-│   │   │   └── TeamManager.tsx
-│   │   ├── About.tsx         # About section component
-│   │   ├── Contact.tsx       # Contact form component
-│   │   ├── Events.tsx        # Events showcase component
-│   │   ├── Footer.tsx        # Website footer
-│   │   ├── Gallery.tsx       # Photo gallery component
-│   │   ├── Hero.tsx          # Hero section component
-│   │   ├── Navigation.tsx    # Navigation bar
-│   │   ├── Resources.tsx     # Resources section
-│   │   └── Team.tsx          # Team showcase component
-│   ├── lib/                  # Utility libraries
-│   │   ├── emailjs.ts        # EmailJS configuration
-│   │   └── supabase.ts       # Supabase client and functions
-│   ├── App.tsx               # Main application component
-│   ├── index.css             # Global styles
-│   ├── main.tsx              # Application entry point
-│   └── vite-env.d.ts         # Vite type definitions
-├── supabase/                 # Database migrations
-│   └── migrations/           # SQL migration files
-├── .env.example              # Environment variables template
-├── .gitignore                # Git ignore rules
-├── eslint.config.js          # ESLint configuration
-├── index.html                # HTML template
-├── package.json              # Project dependencies
-├── postcss.config.js         # PostCSS configuration
-├── tailwind.config.js        # Tailwind CSS configuration
-├── tsconfig.json             # TypeScript configuration
-├── tsconfig.app.json         # App-specific TypeScript config
-├── tsconfig.node.json        # Node-specific TypeScript config
-└── vite.config.ts            # Vite configuration
-```
-
-## 💻 Development
-
-### Available Scripts
-
-```bash
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Run ESLint
-npm run lint
-
-# Type checking
-npm run type-check
-```
-
-### Development Workflow
-
-1. **Feature Development**
-
-   ```bash
-   git checkout -b feature/your-feature-name
-   npm run dev
-   # Make your changes
-   npm run lint
-   npm run build
-   git commit -m "feat: add your feature"
-   git push origin feature/your-feature-name
-   ```
-
-2. **Component Development**
-
-   - Create components in `src/components/`
-   - Use TypeScript for type safety
-   - Follow the existing naming conventions
-   - Add proper prop types and documentation
-
-3. **Styling Guidelines**
-   - Use Tailwind CSS utility classes
-   - Follow the Google Material Design principles
-   - Maintain consistent spacing using the 8px grid system
-   - Use the predefined color palette (Google colors)
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the root directory with the following variables:
-
-```env
-# Supabase Configuration
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# EmailJS Configuration (Optional)
-VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
-
-# Analytics (Optional)
-VITE_GA_TRACKING_ID=your_google_analytics_id
-```
-
-### Environment Variable Descriptions
-
-| Variable                   | Description                 | Required |
-| -------------------------- | --------------------------- | -------- |
-| `VITE_SUPABASE_URL`        | Your Supabase project URL   | ✅       |
-| `VITE_SUPABASE_ANON_KEY`   | Supabase anonymous key      | ✅       |
-| `VITE_EMAILJS_SERVICE_ID`  | EmailJS service identifier  | ❌       |
-| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS template identifier | ❌       |
-| `VITE_EMAILJS_PUBLIC_KEY`  | EmailJS public key          | ❌       |
-
-## 🗄 Database Setup
-
-### 1. Create Supabase Project
-
-1. Go to [Supabase](https://supabase.com)
-2. Create a new project
-3. Copy your project URL and anon key
-4. Update your `.env` file
-
-### 2. Run Migrations
-
-The database schema is automatically created using the migration files in `supabase/migrations/`. The migrations include:
-
-- **Events Table**: Store event information
-- **Team Members Table**: Team member profiles
-- **Gallery Images Table**: Event photos and media
-- **Resources Table**: Developer resources and tools
-- **Contact Submissions Table**: Contact form submissions
-
-### 3. Set Up Row Level Security (RLS)
-
-The migrations automatically configure RLS policies for:
-
-- Public read access for website content
-- Authenticated admin access for content management
-- Secure contact form submissions
-
-### 4. Create Admin User
-
-```sql
--- Run this in your Supabase SQL editor to create an admin user
-INSERT INTO auth.users (email, encrypted_password, email_confirmed_at, created_at, updated_at)
-VALUES ('admin@gdgcomsats.com', crypt('your-secure-password', gen_salt('bf')), now(), now(), now());
-```
-
-## 📧 Email Configuration
-
-### EmailJS Setup
-
-1. Create an account at [EmailJS](https://www.emailjs.com/)
-2. Create an email service (Gmail, Outlook, etc.)
-3. Create email templates using the provided templates in `emailjs-templates.md`
-4. Update your environment variables
-
-### Email Templates
-
-The project includes three professional email templates:
-
-- **Contact Form Submission**: For receiving contact form messages
-- **Auto-Reply**: Automatic response to users
-- **Event Registration**: For event registration confirmations
-
-## 🚀 Deployment
-
-### Netlify Deployment (Recommended)
-
-1. **Build the Project**
-
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to Netlify**
-
-   ```bash
-   # Install Netlify CLI
-   npm install -g netlify-cli
-
-   # Login to Netlify
-   netlify login
-
-   # Deploy
-   netlify deploy --prod --dir=dist
-   ```
-
-3. **Environment Variables**
-   - Go to your Netlify dashboard
-   - Navigate to Site settings > Environment variables
-   - Add all required environment variables
-
-### Manual Deployment
-
-1. **Build for Production**
-
-   ```bash
-   npm run build
-   ```
-
-2. **Upload to Your Hosting Provider**
-   - Upload the contents of the `dist/` folder
-   - Configure your server to serve `index.html` for all routes
-   - Set up environment variables on your hosting platform
-
-### Deployment Checklist
-
-- [ ] Environment variables configured
-- [ ] Database migrations applied
-- [ ] Email templates set up
-- [ ] Domain configured
-- [ ] SSL certificate installed
-- [ ] Analytics tracking configured
-- [ ] Error monitoring set up
-
-## 🔧 Admin Panel
-
-### Accessing the Admin Panel
-
-1. Navigate to `/admin` on your deployed website
-2. Login with your admin credentials
-3. Use the dashboard to manage content
-
-### Admin Features
-
-- **Dashboard**: Overview of website statistics
-- **Events Management**: Create, edit, and delete events
-- **Team Management**: Manage team member profiles
-- **Gallery Management**: Upload and organize photos
-- **Resources Management**: Curate developer resources
-- **Contact Management**: View and respond to messages
-
-### Admin User Management
-
-```sql
--- Create additional admin users
-INSERT INTO auth.users (email, encrypted_password, email_confirmed_at, created_at, updated_at)
-VALUES ('newadmin@gdgcomsats.com', crypt('secure-password', gen_salt('bf')), now(), now(), now());
-```
-
-## 🤝 Contributing
-
-We welcome contributions from the community! Here's how you can help:
-
-### Getting Started
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run tests and linting (`npm run lint`)
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
-
-### Contribution Guidelines
-
-- Follow the existing code style and conventions
-- Write clear, descriptive commit messages
-- Add comments for complex logic
-- Update documentation when necessary
-- Test your changes thoroughly
-
-### Code Style
-
-- Use TypeScript for type safety
-- Follow React best practices and hooks patterns
-- Use Tailwind CSS for styling
-- Maintain consistent naming conventions
-- Write self-documenting code
-
-### Reporting Issues
-
-- Use the GitHub issue tracker
-- Provide detailed descriptions
-- Include steps to reproduce
-- Add screenshots when helpful
-
-## 🆘 Support
-
-### Getting Help
-
-- **Documentation**: Check this README and inline code comments
-- **Issues**: Create a GitHub issue for bugs or feature requests
-- **Community**: Join our [GDG Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/)
-- **Email**: Contact us at gdsc.cuilahore@gmail.com
-
-### Community Links
-
-- **Website**: [gdgcomsats.com](https://gdgoc-cui-lahore.vercel.app/)
-- **Instagram**: [@gdgoc.cuilhr](https://www.instagram.com/gdgoc.cuilhr/)
-- **LinkedIn**: [GDG COMSATS](https://www.linkedin.com/company/gdsccuilhr)
-- **WhatsApp**: [Community Group](https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM)
-
 ---
+
+## About the society
+
+GDG on Campus at COMSATS University Islamabad, Lahore Campus is a student-run developer community affiliated with Google Developer Groups. We run workshops, tech talks and hackathons, and give students a place to learn Google technologies, build projects and meet other developers on campus.
+
+This repository contains the society's web presence:
+
+- a **public website** for events, the team, the photo gallery, learning resources, contact and event certificates
+- a **content admin panel** the core team uses to publish all of that
+
+## Live deployments
+
+| App | URL | Notes |
+| --- | --- | --- |
+| Public website | https://gdgoc-cui-lahore.vercel.app | Next.js app in `apps/landing` |
+| Admin panel | https://gdgoc-cui-admin.vercel.app | Vite app in `apps/admin`; requires a Firebase Auth account |
+
+## What's on the site
+
+### Public pages (`apps/landing`)
+
+| Route | Contents |
+| --- | --- |
+| `/` | Hero, about, events, gallery, resources and contact section |
+| `/team` | Lead profile plus the current team members |
+| `/contact` | Contact form (sends through EmailJS) and social links |
+| `/certificates` | Attendees find themselves in an event's attendee list by email and download a generated PDF certificate |
+| `/hackathon` | Standalone page for the GDG COMSATS Hackathon 2026 |
+
+Events, gallery images, resources and team members are read from Firestore. The team lead section is still written directly in `apps/landing/src/app/team/page.tsx`.
+
+### Admin panel (`apps/admin`)
+
+Sign-in is email/password through Firebase Authentication. Signed-in admins can:
+
+- see counts for events, team members, gallery images and resources on the dashboard;
+- create, edit and delete **events**, **team members**, **gallery images** and **resources**;
+- create certificate entries for completed events by uploading a PDF template and an `.xlsx` attendee list, or remove existing entries.
+
+Image and file uploads go to Cloudinary.
+
+## Tech stack
+
+| Layer | Public site | Admin panel |
+| --- | --- | --- |
+| Framework | Next.js 15 (App Router) | Vite 5 |
+| UI | React 19, Tailwind CSS 4 | React 18, Tailwind CSS 3 |
+| Animation | GSAP, Framer Motion | Framer Motion |
+| Data | Firebase Firestore | Firebase Firestore |
+| Auth | — | Firebase Authentication (email/password) |
+| Media | Cloudinary | Cloudinary |
+| Email | EmailJS (`@emailjs/browser`) | — |
+| Certificates | `pdf-lib` for PDF generation | `xlsx` for attendee imports |
+| Hosting | Vercel | Vercel |
+| Tooling | pnpm workspaces, TypeScript | pnpm workspaces, TypeScript, ESLint |
+
+Firestore collections in use: `events`, `team_members`, `gallery_images`, `resources`, `event_certificates`. Access rules live in [`firestore.rules`](./firestore.rules) — public read, authenticated write.
+
+## Local development
+
+### Prerequisites
+
+- **Node.js 18.18 or newer** (minimum for Next.js 15; Node 20 LTS recommended)
+- **pnpm 10** — pinned as `pnpm@10.12.4` in `package.json`
+- A **Firebase project** with Firestore and Authentication enabled
+- A **Cloudinary account** with an unsigned upload preset (only needed for uploads in the admin panel)
+
+### 1. Clone
+
+```bash
+git clone https://github.com/gdgcuiadmin/gdgoc-cui-website.git
+cd gdgoc-cui-website
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Configure environment variables
+
+Each app includes a `.env.example` listing every variable it needs. Copy both templates and fill in your own project values:
+
+```bash
+cp apps/landing/.env.example apps/landing/.env
+cp apps/admin/.env.example apps/admin/.env
+```
+
+`.env` files are gitignored. The variables are described in [Environment variables](#environment-variables).
+
+### 4. Run
+
+```bash
+pnpm dev            # both apps in parallel
+pnpm dev:landing    # public site only  -> http://localhost:3000
+pnpm dev:admin      # admin panel only  -> http://localhost:5173
+```
+
+### 5. Build and preview
+
+```bash
+pnpm --filter landing build
+pnpm --filter landing start
+
+pnpm --filter admin build
+pnpm --filter admin preview
+```
+
+## Environment variables
+
+The same nine values are needed by both apps, with different prefixes: `NEXT_PUBLIC_` for the Next.js site and `VITE_` for the Vite admin panel. Both `.env.example` files list them in this order.
+
+| Setting | Public site (`apps/landing/.env`) | Admin panel (`apps/admin/.env`) |
+| --- | --- | --- |
+| Firebase API key | `NEXT_PUBLIC_FIREBASE_API_KEY` | `VITE_FIREBASE_API_KEY` |
+| Auth domain | `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `VITE_FIREBASE_AUTH_DOMAIN` |
+| Project ID | `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | `VITE_FIREBASE_PROJECT_ID` |
+| Storage bucket | `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | `VITE_FIREBASE_STORAGE_BUCKET` |
+| Messaging sender ID | `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | `VITE_FIREBASE_MESSAGING_SENDER_ID` |
+| App ID | `NEXT_PUBLIC_FIREBASE_APP_ID` | `VITE_FIREBASE_APP_ID` |
+| Realtime Database URL | `NEXT_PUBLIC_FIREBASE_DATABASE_URL` | `VITE_FIREBASE_DATABASE_URL` |
+| Cloudinary cloud name | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | `VITE_CLOUDINARY_CLOUD_NAME` |
+| Cloudinary upload preset | `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | `VITE_CLOUDINARY_UPLOAD_PRESET` |
+
+Firebase values come from **Project settings → General → Your apps** in the Firebase console. The Cloudinary preset must allow unsigned uploads.
+
+## Firebase setup
+
+1. Create a Firebase project and add a web app to get the config values above.
+2. Enable **Authentication → Sign-in method → Email/Password**, then create an account for each admin under **Users**. There is no public sign-up page in the admin panel.
+3. Create a **Firestore** database. In production mode, no client reads or writes work until the rules are in place.
+4. Copy the contents of [`firestore.rules`](./firestore.rules) into **Firestore → Rules** in the Firebase console and publish. The rules allow public reads and authenticated writes to the collections the site uses.
+5. Collections are created when the first document is added — add the first entries from the admin panel or the console.
+
+## Deployment
+
+The public site and the admin panel are deployed as two separate Vercel projects connected to this repository. Create both from the Vercel dashboard — import the repository once per app, since the repository root itself is not a deployable app.
+
+| Vercel project | Root directory | Build command | Output |
+| --- | --- | --- | --- |
+| Public website | `apps/landing` | `pnpm build` | `.next` |
+| Admin panel | `apps/admin` | `pnpm build` | `dist` |
+
+The build and install commands come from each app's `vercel.json`; leave Vercel's default framework detection and build settings in place.
+
+### Public website
+
+1. Import the repository and set **Root Directory** to `apps/landing`.
+2. Add the `NEXT_PUBLIC_FIREBASE_*` and `NEXT_PUBLIC_CLOUDINARY_*` variables under **Settings → Environment Variables**, for the environments you deploy (Production, and Preview if you use preview builds).
+3. Deploy. Vercel detects Next.js and builds with pnpm.
+
+### Admin panel
+
+1. Import the same repository and set **Root Directory** to `apps/admin`.
+2. Add the `VITE_FIREBASE_*` and `VITE_CLOUDINARY_*` variables in **Settings → Environment Variables**.
+3. Deploy. Vercel detects Vite and serves the static build from `dist`.
+
+Both frameworks inline environment variables at build time, so changing a variable requires a new deployment of the affected project before it takes effect.
+
+## Contributing
+
+Contributions from society members are welcome — content fixes, UI work and bug fixes all help.
+
+1. Open an issue (or comment on an existing one) describing the change.
+2. Branch from `main` using the existing conventions: `feature/<name>`, `fix/<name>`.
+3. Make the change, run the relevant build, and keep the existing component/query patterns:
+   - TypeScript everywhere; functional React components;
+   - Tailwind classes rather than new CSS files;
+   - Firestore access through the existing helpers in `src/lib/db.ts`, not ad-hoc `getDocs` calls in components.
+4. Open a pull request into `main` with a short description and screenshots for UI changes.
+
+There is currently no automated test suite or CI workflow, so a passing local build is the check to include in the PR description:
+
+```bash
+pnpm --filter landing build
+pnpm --filter admin build
+pnpm --filter admin lint
+```
+
+## Contact
+
+- **Email:** [gdsc.cuilahore@gmail.com](mailto:gdsc.cuilahore@gmail.com)
+- **Location:** COMSATS University Islamabad, Lahore Campus, Raiwind
+- **Community / join:** [GDG community page](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/) · [WhatsApp group](https://chat.whatsapp.com/JFMjnJaTSZZD7gyDSSZ8ZM)
+- **Social:** [Instagram](https://www.instagram.com/gdgoc.cuilhr/) · [LinkedIn](https://www.linkedin.com/company/gdsccuilhr)
+- **Bugs and feature requests:** open an issue on [GitHub](https://github.com/gdgcuiadmin/gdgoc-cui-website/issues)
 
 <div align="center">
 
-**Built with ❤️ by the GDG COMSATS Team**
-
-[Website](https://gdgcomsats.com) • [Community](https://gdg.community.dev/gdg-on-campus-comsats-university-islamabad-lahore-campus-lahore-pakistan/) • [GitHub](https://github.com/gdgcuiadmin)
+Maintained by the GDG COMSATS web team.
 
 </div>
