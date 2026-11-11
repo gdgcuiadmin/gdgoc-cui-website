@@ -32,17 +32,17 @@ export const metadata: Metadata = {
     "Kotlin",
     "Dart Programming",
   ],
-  authors: [{ name: "GDG COMSATS Team", url: "https://gdgcomsats.vercel.app" }],
+  authors: [{ name: "GDG COMSATS Team", url: "https://gdgoc-cui-lahore.vercel.app" }],
   creator: "GDG COMSATS Team",
   openGraph: {
     title: "GDG COMSATS - Building the Future of Technology Together",
     description:
       "Join COMSATS University's premier tech community. Learn, collaborate, and innovate with Google's cutting-edge technologies through workshops, hackathons, and community events.",
-    url: "https://gdgcomsats.vercel.app",
+    url: "https://gdgoc-cui-lahore.vercel.app",
     siteName: "GDG COMSATS",
     images: [
       {
-        url: "https://gdgcomsats.vercel.app/opengraph-image.png",
+        url: "https://gdgoc-cui-lahore.vercel.app/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "GDG COMSATS - Google Developer Groups at COMSATS University Lahore",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
   },
   referrer: "no-referrer-when-downgrade",
   alternates: {
-    canonical: "https://gdgcomsats.vercel.app",
+    canonical: "https://gdgoc-cui-lahore.vercel.app",
     types: {
       "application/rss+xml": [
         { url: "/feed.xml", title: "GDG COMSATS Events Feed" },
